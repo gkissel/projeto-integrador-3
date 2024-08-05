@@ -1,0 +1,23 @@
+{
+  "name": "@repo/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "library.js",
+    "next.js",
+    "react-internal.js"
+  ],
+  "devDependencies": {
+    "@repo/prettier": "workspace:*",
+    "@rocketseat/eslint-config": "^2.2.2",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "^14.2.5",
+    "eslint-plugin-simple-import-sort": "^12.1.1"
+  },
+  "prettier": "@repo/prettier",
+  "eslintConfig": {
+    "extends": [
+      "./library.js"
+    ]
+  }
+}
