@@ -19,5 +19,11 @@
     "extends": [
       "./library.js"
     ]
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.6.0",
+    "@typescript-eslint/parser": "^8.6.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-drizzle": "^0.2.3"
   }
 }
