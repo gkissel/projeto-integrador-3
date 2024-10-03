@@ -1,8 +1,6 @@
 import type { FastifyInstance } from 'fastify'
 import { ZodError } from 'zod'
 
-
-
 type FastifyErrorHandler = FastifyInstance['errorHandler']
 
 export const errorHandler: FastifyErrorHandler = (error, request, reply) => {
