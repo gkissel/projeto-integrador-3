@@ -2,7 +2,7 @@ import { Either, left, right } from '@/core/either'
 
 import { Encrypter } from '../../cryptography/encrypter'
 import { HashComparer } from '../../cryptography/hash-comparer'
-import { UsersRepository } from '../../repositories/abstract/users-repository'
+import { UsersRepository } from '../../repositories/abstract/users.repository'
 import { WrongCredentialsError } from '../errors/wrong-credentials-error'
 
 interface AuthenticateUserServiceRequest {

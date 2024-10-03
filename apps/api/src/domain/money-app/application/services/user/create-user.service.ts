@@ -2,7 +2,7 @@ import { Either, left, right } from '@/core/either'
 import { User } from '@/domain/money-app/enterprise/entities/user'
 
 import { HashGenerator } from '../../cryptography/hash-generator'
-import { UsersRepository } from '../../repositories/abstract/users-repository'
+import { UsersRepository } from '../../repositories/abstract/users.repository'
 import { UserAlreadyExistsError } from '../errors/user-already-exists-error'
 
 export interface CreateUserServiceRequest {
