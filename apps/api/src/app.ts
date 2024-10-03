@@ -3,10 +3,15 @@ import fastifyJwt from '@fastify/jwt'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUI from '@fastify/swagger-ui'
 import fastify from 'fastify'
-import { jsonSchemaTransform, serializerCompiler, validatorCompiler, ZodTypeProvider } from 'fastify-type-provider-zod'
+import {
+  jsonSchemaTransform,
+  serializerCompiler,
+  validatorCompiler,
+  ZodTypeProvider,
+} from 'fastify-type-provider-zod'
+
 import { env } from './infra/env'
 import { errorHandler } from './infra/http/error-handler'
-
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 
