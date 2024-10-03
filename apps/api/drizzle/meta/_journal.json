@@ -15,6 +15,13 @@
       "when": 1727738337431,
       "tag": "0001_naive_nekra",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1727914362089,
+      "tag": "0002_odd_master_chief",
+      "breakpoints": true
     }
   ]
 }

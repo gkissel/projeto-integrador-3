@@ -10,7 +10,6 @@ export const users = pgTable('users', {
   birthdate: timestamp('birthdate').notNull(),
 
   telephone: text('telephone').notNull().unique(),
-  username: text('username').notNull().unique(),
 
   email: text('email').notNull().unique(),
   password: text('password').notNull(),
