@@ -11,6 +11,11 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { env } from './infra/env'
+import { authenticateWithPassword } from './infra/http/controllers/user/authenticate-user.controller'
+import { createAccount } from './infra/http/controllers/user/create-user.controller'
+import { deleteProfile } from './infra/http/controllers/user/delete-user.controller'
+import { getProfile } from './infra/http/controllers/user/get-user-profile.controller'
+import { updateProfile } from './infra/http/controllers/user/update-user.controller'
 import { errorHandler } from './infra/http/error-handler'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
@@ -23,8 +28,8 @@ app.setErrorHandler(errorHandler)
 app.register(fastifySwagger, {
   openapi: {
     info: {
-      title: 'Next.js SaaS',
-      description: 'Full-stack SaaS with multi-tenant & RBAC.',
+      title: 'Projeto Integrador 3',
+      description: 'Projeto Integrador 3.',
       version: '1.0.0',
     },
     components: {
@@ -49,3 +54,9 @@ app.register(fastifyJwt, {
 })
 
 app.register(fastifyCors)
+
+app.register(createAccount)
+app.register(authenticateWithPassword)
+app.register(getProfile)
+app.register(updateProfile)
+app.register(deleteProfile)
