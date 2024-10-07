@@ -7,5 +7,6 @@ app
     port: env.PORT,
   })
   .then(() => {
+    // eslint-disable-next-line no-console
     console.log(`🚀 Server is listening on port ${env.PORT}`)
   })
