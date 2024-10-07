@@ -21,7 +21,7 @@ type CreateUserServiceResponse = Either<
   }
 >
 
-export class CreateQuestionService {
+export class CreateUserService {
   constructor(
     private usersRepository: UsersRepository,
     private hashGenerator: HashGenerator,

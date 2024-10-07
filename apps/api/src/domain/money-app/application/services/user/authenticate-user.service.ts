@@ -1,6 +1,5 @@
 import { Either, left, right } from '@/core/either'
 
-import { Encrypter } from '../../cryptography/encrypter'
 import { HashComparer } from '../../cryptography/hash-comparer'
 import { UsersRepository } from '../../repositories/abstract/users.repository'
 import { WrongCredentialsError } from '../errors/wrong-credentials-error'
@@ -13,7 +12,7 @@ interface AuthenticateUserServiceRequest {
 type AuthenticateUserServiceResponse = Either<
   WrongCredentialsError,
   {
-    accessToken: string
+    userId: string
   }
 >
 
@@ -21,7 +20,6 @@ export class AuthenticateUserService {
   constructor(
     private usersRepository: UsersRepository,
     private hashComparer: HashComparer,
-    private encrypter: Encrypter,
   ) {}
 
   async execute({
@@ -43,12 +41,8 @@ export class AuthenticateUserService {
       return left(new WrongCredentialsError())
     }
 
-    const accessToken = await this.encrypter.encrypt({
-      sub: user.id.toString(),
-    })
-
     return right({
-      accessToken,
+      userId: user.id.toString(),
     })
   }
 }

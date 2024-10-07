@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 /* eslint-disable drizzle/enforce-delete-with-where */
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
-import { User } from '@/domain/money-app/enterprise/entities/user'
 
 import { UsersRepository } from '../../repositories/abstract/users.repository'
 
@@ -9,14 +9,9 @@ export interface DeleteUserServiceRequest {
   userId: string
 }
 
-type DeleteUserServiceResponse = Either<
-  ResourceNotFoundError,
-  {
-    user: User
-  }
->
+type DeleteUserServiceResponse = Either<ResourceNotFoundError, {}>
 
-export class DeleteQuestionService {
+export class DeleteUserService {
   constructor(private usersRepository: UsersRepository) {}
 
   async execute({
@@ -30,8 +25,6 @@ export class DeleteQuestionService {
 
     await this.usersRepository.delete(userId)
 
-    return right({
-      user,
-    })
+    return right({})
   }
 }

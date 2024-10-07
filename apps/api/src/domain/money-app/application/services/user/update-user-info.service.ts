@@ -18,7 +18,7 @@ type UpdateUserServiceResponse = Either<
   }
 >
 
-export class UpdateQuestionService {
+export class UpdateUserService {
   constructor(private usersRepository: UsersRepository) {}
 
   async execute({
