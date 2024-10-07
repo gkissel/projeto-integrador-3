@@ -1,11 +1,12 @@
 {
   "extends": "@repo/tsconfig/node.json",
-  "include": ["src/**/*", "@types/*.d.ts"],
+  "include": ["src/**/*", "@types/*.d.ts", "*.d.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "allowSyntheticDefaultImports": true
   }
 }
