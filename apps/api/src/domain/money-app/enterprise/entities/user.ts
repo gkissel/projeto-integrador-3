@@ -57,6 +57,18 @@ export class User extends Entity<UserProps> {
     this.touch()
   }
 
+  public update({
+    firstName,
+    lastName,
+    telephone,
+  }: Partial<Pick<UserProps, 'firstName' | 'lastName' | 'telephone'>>) {
+    if (firstName) this.props.firstName = firstName
+    if (lastName) this.props.lastName = lastName
+    if (telephone) this.props.telephone = telephone
+
+    this.touch()
+  }
+
   static create(props: Optional<UserProps, 'createdAt'>, id?: UniqueEntityID) {
     const organization = new User(
       {
