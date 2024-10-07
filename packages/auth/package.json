@@ -11,7 +11,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "@repo/eslint-config/library"
+      "@repo/eslint-config/node"
     ]
   },
   "prettier": "@repo/prettier",
