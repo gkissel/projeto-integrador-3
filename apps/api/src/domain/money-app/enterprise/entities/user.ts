@@ -11,8 +11,8 @@ export interface UserProps {
   email: string
   password: string
 
-  createdAt?: Date
-  updatedAt?: Date
+  createdAt?: Date | null
+  updatedAt?: Date | null
 }
 
 export class User extends Entity<UserProps> {
