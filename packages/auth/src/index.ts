@@ -19,6 +19,7 @@ export * from './models/project'
 export * from './models/user'
 export * from './roles'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const appAbilitiesSchema = z.union([
   projectSubject,
   userSubject,
