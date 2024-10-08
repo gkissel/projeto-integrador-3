@@ -1,6 +1,5 @@
 import { ChevronUpIcon, UserCircleIcon } from '@heroicons/react/16/solid'
 import { HomeIcon } from '@heroicons/react/20/solid'
-import { LogOut } from 'lucide-react'
 
 import { auth } from '@/auth/auth'
 import { Avatar } from '@/components/catalyst/avatar'
@@ -31,6 +30,7 @@ import {
 import { SidebarLayout } from '@/components/catalyst/sidebar-layout'
 import { OrganizationSwitcher } from '@/components/organization-switcher'
 
+import { LogOut } from 'lucide-react'
 import NavItem from './nav-item'
 
 function getInitials(name: string): string {
@@ -50,18 +50,16 @@ function AccountDropdownMenu({
 }) {
   return (
     <DropdownMenu className='min-w-64' anchor={anchor}>
-      <DropdownItem href='/account'>
+      <DropdownItem href='/account' >
         <UserCircleIcon />
         <DropdownLabel>My account</DropdownLabel>
       </DropdownItem>
 
       <DropdownDivider />
 
-      <DropdownItem href='/api/auth/sign-out'>
+      <DropdownItem href='/api/auth/sign-out' prefetch={false}>
         <LogOut className='size-4 text-rose-500' />
-        <DropdownLabel className='text-rose-500'>
-          <a href='/api/auth/sign-out'>Sign Out</a>
-        </DropdownLabel>
+        <DropdownLabel className='text-rose-500'>Sign Out</DropdownLabel>
       </DropdownItem>
     </DropdownMenu>
   )
@@ -81,7 +79,7 @@ export async function ApplicationLayout({
           <NavbarSection>
             <Dropdown>
               <DropdownButton as={NavbarItem}>
-                <Avatar src='/users/erica.jpg' square />
+                <Avatar  initials={getInitials(`${user.firstName} ${user.lastName}`)} square />
               </DropdownButton>
               <AccountDropdownMenu anchor='bottom end' />
             </Dropdown>

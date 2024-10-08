@@ -45,15 +45,20 @@ export async function ability() {
 export async function auth() {
   const token = cookies().get('token')?.value
 
+  // console.log(typeof token)
+
   if (!token) {
     redirect('/auth/sign-in')
   }
 
   try {
     const { user } = await getProfile()
-
+    // console.log(typeof user)
     return { user }
-  } catch {}
+  } catch {
+    console.log('Deu erro')
+  }
 
+  console.log('not authenticated')
   redirect('/api/auth/sign-out')
 }

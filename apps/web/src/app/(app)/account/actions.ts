@@ -20,7 +20,7 @@ export async function updateProfileAction(data: FormData) {
   if (!result.success) {
     const errors = result.error.flatten().fieldErrors
 
-    console.log(errors)
+    // console.log(errors)
     return { success: false, message: null, errors }
   }
 
@@ -34,10 +34,10 @@ export async function updateProfileAction(data: FormData) {
     })
   } catch (err) {
     if (err instanceof HTTPError) {
-      console.log(await err.response.body)
+      // console.log(await err.response.body)
       const { message } = await err.response.json()
 
-      console.log(message)
+      // console.log(message)
       return { success: false, message, errors: null }
     }
 

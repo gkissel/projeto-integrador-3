@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
+import { auth } from '@/auth/auth'
 import { Heading } from '@/components/catalyst/heading'
-import { getProfile } from '@/http/organization/get-profile'
 
 import UpdateAccountForm from './update-account-form'
 
@@ -10,7 +10,8 @@ export const metadata: Metadata = {
 }
 
 export default async function Settings() {
-  const { user } = await getProfile()
+  // console.log('Entrando na pagina')
+  const { user } = await auth()
   return (
     <div className='mx-auto max-w-4xl space-y-8'>
       {' '}

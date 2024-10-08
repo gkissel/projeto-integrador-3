@@ -16,7 +16,7 @@ export default function NavItem({
 
   useEffect(() => {
     if (pathname !== '/') {
-      console.log(pathname, href)
+      // console.log(pathname, href)
       isCurrent = pathname.startsWith(href)
     }
   }, [pathname])
