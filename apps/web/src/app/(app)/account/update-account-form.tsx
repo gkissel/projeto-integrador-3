@@ -36,7 +36,7 @@ export default function UpdateAccountForm({
 }) {
   const router = useRouter()
 
-  console.log(user.birthdate)
+  // console.log(user.birthdate)
   const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
     updateProfileAction,
     () => {
@@ -173,19 +173,20 @@ export default function UpdateAccountForm({
 
         <Divider className='my-10' />
 
-        <div className='flex items-center justify-between pt-4'>
+        <div className='flex items-center flex-col lg:flex-row gap-4 lg:justify-between pt-4'>
           <DeleteAccountButton />
-          <div className='flex justify-end gap-4'>
+          <div className='flex justify-end gap-4 lg:flex-row flex-col w-full lg:w-fit'>
             <Button
               type='reset'
               plain
+              className='w-full lg:w-fit'
               onClick={() => {
                 formRef.current?.reset()
               }}
             >
               Reset
             </Button>
-            <Button type='submit' color='indigo' disabled={isPending}>
+            <Button type='submit' color='indigo' disabled={isPending}  className='w-full lg:w-fit' >
               {isPending ? (
                 <Loader2 className='size-4 animate-spin' />
               ) : (

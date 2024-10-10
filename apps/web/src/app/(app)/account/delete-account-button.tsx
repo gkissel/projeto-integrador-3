@@ -21,7 +21,7 @@ export default function DeleteAccountButton() {
   return (
     <>
       <Button
-        color='red'
+        color='red'  className='w-full lg:w-fit'
         onClick={() => {
           setIsOpen(true)
         }}
