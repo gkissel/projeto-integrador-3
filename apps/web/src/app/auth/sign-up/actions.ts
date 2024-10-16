@@ -46,7 +46,7 @@ export async function signUpAction(data: FormData) {
       console.log(await err.response.body)
       const { message } = await err.response.json()
 
-      console.log(message)
+      // console.log(message)
       return { success: false, message, errors: null }
     }
 
