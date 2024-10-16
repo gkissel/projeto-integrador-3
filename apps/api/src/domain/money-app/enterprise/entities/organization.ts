@@ -8,8 +8,8 @@ export interface OrganizationProps {
   slug: Slug
   ownerId?: UniqueEntityID | null
 
-  createdAt?: Date
-  updatedAt?: Date
+  createdAt?: Date | null
+  updatedAt?: Date | null
 }
 
 export default class Organization extends Entity<OrganizationProps> {
