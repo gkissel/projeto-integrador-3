@@ -19,7 +19,7 @@ type CreateOrganizationServiceResponse = Either<
   }
 >
 
-export class CreateQuestionService {
+export class CreateOrganizationService {
   constructor(private organizationsRepository: OrganizationsRepository) {}
 
   async execute({
