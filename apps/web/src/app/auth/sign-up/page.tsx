@@ -1,7 +1,11 @@
-import Image from 'next/image'
+import dynamic from 'next/dynamic'
 
-import Preview from '../../../../public/preview.png'
-import { SignUpForm } from './sign-up-form'
+const SignUpForm = dynamic(
+  () => import('./sign-up-form').then((mod) => mod.SignUpForm),
+  {},
+)
+
+const FeatureCarousel = dynamic(() => import('../components/feature-carousel'))
 
 export default function SignUpPage() {
   return (
@@ -10,15 +14,8 @@ export default function SignUpPage() {
         <SignUpForm />
       </div>
 
-      <div className='h-full w-full py-32'>
-        <div className='relative h-full w-full rounded-3xl border'>
-          <Image
-            src={Preview}
-            alt=''
-            fill
-            className='rounded-3xl border object-cover'
-          />
-        </div>
+      <div className='hidden h-full w-full items-center px-10 lg:flex'>
+        <FeatureCarousel />
       </div>
     </div>
   )

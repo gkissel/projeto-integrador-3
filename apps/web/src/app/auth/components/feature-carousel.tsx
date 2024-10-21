@@ -2,6 +2,7 @@
 
 import 'swiper/css'
 import 'swiper/css/pagination'
+import './carousel.css'
 
 import Image from 'next/image'
 import Imagem1 from 'public/Imagem-1.webp'
@@ -15,13 +16,12 @@ import { NeonGradientCard } from '@/components/neon-gradient-card'
 
 export default function FeatureCarousel() {
   return (
-    <div className='h-full w-full py-32'>
+    <div className='my-auto h-auto w-full'>
       <NeonGradientCard className='mx-auto h-min w-min'>
         <Swiper
           className='mx-auto w-[27rem]'
           modules={[Pagination]}
           pagination={{
-            el: '.swiper-pagination',
             type: 'bullets',
             clickable: true,
           }}
@@ -66,7 +66,6 @@ export default function FeatureCarousel() {
           </SwiperSlide>
         </Swiper>
       </NeonGradientCard>
-      <div className='swiper-pagination' />
     </div>
   )
 }

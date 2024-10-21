@@ -12,7 +12,7 @@ export default function SignInPage() {
     <div className='grid min-h-screen antialiased lg:grid-cols-2'>
       <SignInForm />
 
-      <div className='hidden h-full w-full px-10 lg:block'>
+      <div className='hidden h-full w-full items-center px-10 lg:flex'>
         <FeatureCarousel />
       </div>
     </div>
