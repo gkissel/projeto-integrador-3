@@ -1,22 +1,19 @@
-import Image from 'next/image'
+import dynamic from 'next/dynamic'
 
-import Preview from '../../../../public/preview.png'
-import { SignInForm } from './sign-in-form'
+const SignInForm = dynamic(
+  () => import('./sign-in-form').then((mod) => mod.SignInForm),
+  {},
+)
+
+const FeatureCarousel = dynamic(() => import('../components/feature-carousel'))
 
 export default function SignInPage() {
   return (
-    <div className='grid min-h-screen lg:grid-cols-2 antialiased'>   
+    <div className='grid min-h-screen antialiased lg:grid-cols-2'>
       <SignInForm />
-     
-      <div className='h-full w-full py-32 hidden lg:block'>
-        <div className='relative h-full w-full rounded-3xl border'>
-          <Image
-            src={Preview}
-            alt=''
-            fill
-            className='rounded-3xl border object-cover'
-          />
-        </div>
+
+      <div className='hidden h-full w-full px-10 lg:block'>
+        <FeatureCarousel />
       </div>
     </div>
   )

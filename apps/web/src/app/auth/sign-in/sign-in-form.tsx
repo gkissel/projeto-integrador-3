@@ -28,7 +28,7 @@ export function SignInForm() {
   )
 
   return (
-    <div className='space-y-14 w-full grid mx-auto'>
+    <div className='mx-auto grid w-full max-w-sm space-y-14'>
       <div className='flex items-center gap-2'>
         <div className='relative h-24 w-24 rounded-full border p-4'>
           <Image src={Logo} alt='' fill className='rounded-full' />
@@ -42,7 +42,7 @@ export function SignInForm() {
             Welcome back! Please enter your details
           </Text>
         </div>
-        <form onSubmit={handleSubmit} className='w-full lg:min-w-96 space-y-4'>
+        <form onSubmit={handleSubmit} className='w-full space-y-4 lg:min-w-96'>
           {success === false && message && (
             <Alert variant='destructive'>
               <AlertTriangle className='size-4' />
