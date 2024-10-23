@@ -13,7 +13,7 @@ type FastifyErrorHandler = FastifyInstance['errorHandler']
 export const errorHandler: FastifyErrorHandler = (error, request, reply) => {
   if (error instanceof ZodError) {
     reply.status(400).send({
-      message: 'Validation error',
+      message: 'Erro de validação',
       errors: error.flatten().fieldErrors,
     })
   }
@@ -65,5 +65,5 @@ export const errorHandler: FastifyErrorHandler = (error, request, reply) => {
 
   // send error to some observability platform
 
-  reply.status(500).send({ message: 'Internal server error' })
+  reply.status(500).send({ message: 'Erro do Servidor' })
 }

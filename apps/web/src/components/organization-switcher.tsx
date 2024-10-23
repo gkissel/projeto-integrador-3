@@ -41,7 +41,7 @@ export async function OrganizationSwitcher() {
             </Text>
           </>
         ) : (
-          <Text className='text-xs'>Select organization</Text>
+          <Text className='text-xs'>Selecione a organização</Text>
         )}
         <ChevronsUpDown className='ml-auto size-4' />
       </DropdownButton>
@@ -50,7 +50,7 @@ export async function OrganizationSwitcher() {
         className='ml-4 min-w-64 overflow-hidden rounded-md p-3'
       >
         <DropdownSection>
-          <DropdownLabel className='ml-3 pb-2'>Organizations</DropdownLabel>
+          <DropdownLabel className='ml-3 pb-2'>Organizações</DropdownLabel>
 
           {organizations.map((organization) => {
             return (
@@ -75,7 +75,7 @@ export async function OrganizationSwitcher() {
         <DropdownDivider />
         <DropdownItem href='/create-organization'>
           <PlusCircle className='mr-2 size-4' />
-          Create new
+          Criar nova
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>

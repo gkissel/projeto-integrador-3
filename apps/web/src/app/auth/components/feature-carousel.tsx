@@ -9,7 +9,7 @@ import Imagem1 from 'public/Imagem-1.webp'
 import Imagem2 from 'public/Imagem-2.webp'
 import Imagem3 from 'public/Imagem-3.webp'
 import Imagem4 from 'public/Imagem-4.webp'
-import { Pagination } from 'swiper/modules'
+import { Pagination, Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { NeonGradientCard } from '@/components/neon-gradient-card'
@@ -20,12 +20,12 @@ export default function FeatureCarousel() {
       <NeonGradientCard className='mx-auto h-min w-min'>
         <Swiper
           className='mx-auto w-[27rem]'
-          modules={[Pagination]}
+          modules={[Pagination, Autoplay]}
           pagination={{
             type: 'bullets',
             clickable: true,
           }}
-          autoplay={{ delay: 5000 }}
+          autoplay={{ delay: 5000}}
           loop
           slidesPerView={1}
         >

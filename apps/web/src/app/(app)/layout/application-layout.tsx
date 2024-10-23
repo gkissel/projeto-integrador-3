@@ -52,14 +52,14 @@ function AccountDropdownMenu({
     <DropdownMenu className='min-w-64' anchor={anchor}>
       <DropdownItem href='/account' >
         <UserCircleIcon />
-        <DropdownLabel>My account</DropdownLabel>
+        <DropdownLabel>Minha conta</DropdownLabel>
       </DropdownItem>
 
       <DropdownDivider />
 
       <DropdownItem href='/api/auth/sign-out' prefetch={false}>
         <LogOut className='size-4 text-rose-500' />
-        <DropdownLabel className='text-rose-500'>Sign Out</DropdownLabel>
+        <DropdownLabel className='text-rose-500'>Sair</DropdownLabel>
       </DropdownItem>
     </DropdownMenu>
   )
@@ -130,7 +130,7 @@ export async function ApplicationLayout({
             <SidebarSection>
               <NavItem href='/'>
                 <HomeIcon />
-                <SidebarLabel>Home</SidebarLabel>
+                <SidebarLabel>Início</SidebarLabel>
               </NavItem>
               {/* <NavItem href='/events'>
                 <Square2StackIcon />

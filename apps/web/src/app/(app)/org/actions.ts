@@ -12,7 +12,7 @@ const organizationSchema = z
   .object({
     name: z
       .string()
-      .min(4, { message: 'Please, incluide at least 4 characters.' }),
+      .min(4, { message: 'Por favor, inclua pelo menos 4 caracteres.' }),
     domain: z
       .string()
       .nullable()
@@ -27,7 +27,7 @@ const organizationSchema = z
           return true
         },
         {
-          message: 'Please, enter a valid domain.',
+          message: 'Por favor, insira um domínio válido.',
         },
       ),
     shouldAttachUsersByDomain: z
@@ -44,7 +44,7 @@ const organizationSchema = z
       return true
     },
     {
-      message: 'Domain is required when auto-join is enabled.',
+      message: 'O domínio é obrigatório quando o ingresso automático está ativado.',
       path: ['domain'],
     },
   )
@@ -81,14 +81,14 @@ export async function createOrganizationAction(data: FormData) {
 
     return {
       success: false,
-      message: 'Unexpected error, try again in a few minutes.',
+      message: 'Erro inesperado. Tente novamente em alguns minutos.',
       errors: null,
     }
   }
 
   return {
     success: true,
-    message: 'Successfully saved the organization.',
+    message: 'Salvou a organização com sucesso.',
     errors: null,
   }
 }
@@ -126,14 +126,14 @@ export async function updateOrganizationAction(data: FormData) {
 
     return {
       success: false,
-      message: 'Unexpected error, try again in a few minutes.',
+      message: 'Erro inesperado. Tente novamente em alguns minutos.',
       errors: null,
     }
   }
 
   return {
     success: true,
-    message: 'Successfully saved the organization.',
+    message: 'Salvou a organização com sucesso.',
     errors: null,
   }
 }

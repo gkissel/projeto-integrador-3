@@ -35,8 +35,6 @@ export default function UpdateAccountForm({
   }
 }) {
   const router = useRouter()
-
-  // console.log(user.birthdate)
   const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
     updateProfileAction,
     () => {
@@ -51,7 +49,7 @@ export default function UpdateAccountForm({
         {success === false && message && (
           <Alert variant='destructive'>
             <AlertTriangle className='size-4' />
-            <AlertTitle>Sign up failed!</AlertTitle>
+            <AlertTitle>Falha na inscrição!</AlertTitle>
             <AlertDescription>
               <p>{message}</p>
             </AlertDescription>
@@ -60,13 +58,14 @@ export default function UpdateAccountForm({
 
         <section className='grid gap-x-8 gap-y-6 sm:grid-cols-2'>
           <div className='space-y-1'>
-            <Subheading>Name</Subheading>
-            <Text>This will be displayed on your public profile.</Text>
+            <Subheading>Nome</Subheading>
+            <Text>
+            Isso será exibido em seu perfil público.</Text>
           </div>
           <div>
             <FieldGroup className='flex gap-2 !space-y-0'>
               <Field className='space-y-1'>
-                <Label htmlFor='firstName'>First Name</Label>
+                <Label htmlFor='firstName'>Nome</Label>
                 <Input
                   name='firstName'
                   id='firstName'
@@ -81,7 +80,7 @@ export default function UpdateAccountForm({
               </Field>
 
               <Field className='space-y-1'>
-                <Label htmlFor='lastName'>Last Name</Label>
+                <Label htmlFor='lastName'>Sobrenome</Label>
                 <Input
                   name='lastName'
                   id='lastName'
@@ -102,13 +101,13 @@ export default function UpdateAccountForm({
 
         <section className='grid gap-x-8 gap-y-6 sm:grid-cols-2'>
           <div className='space-y-1'>
-            <Subheading>Personal Info</Subheading>
-            <Text>This is not visible on your public profile.</Text>
+            <Subheading>Informações pessoais</Subheading>
+            <Text>Isso não é visível no seu perfil público.</Text>
           </div>
           <div>
             <FieldGroup className='grid grid-cols-2 justify-between gap-2 !space-y-0'>
               <Field className='space-y-1'>
-                <Label htmlFor='birthdate'>Date of birth</Label>
+                <Label htmlFor='birthdate'>Data de nascimento</Label>
                 <Input
                   name='birthdate'
                   id='birthdate'
@@ -130,7 +129,7 @@ export default function UpdateAccountForm({
               </Field>
 
               <Field className='space-y-1'>
-                <Label htmlFor='phone'>Phone Number</Label>
+                <Label htmlFor='phone'>Número de celular</Label>
                 <Input
                   name='telephone'
                   id='telephone'
@@ -184,13 +183,13 @@ export default function UpdateAccountForm({
                 formRef.current?.reset()
               }}
             >
-              Reset
+              Restaurar
             </Button>
             <Button type='submit' color='indigo' disabled={isPending}  className='w-full lg:w-fit' >
               {isPending ? (
                 <Loader2 className='size-4 animate-spin' />
               ) : (
-                'Update account info'
+                'Atualizar informações da conta'
               )}
             </Button>
           </div>

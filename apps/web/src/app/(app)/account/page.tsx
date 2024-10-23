@@ -10,12 +10,11 @@ export const metadata: Metadata = {
 }
 
 export default async function Settings() {
-  // console.log('Entrando na pagina')
   const { user } = await auth()
   return (
     <div className='mx-auto max-w-4xl space-y-8'>
       {' '}
-      <Heading>Account</Heading>
+      <Heading>Minha conta</Heading>
       <div>
         <UpdateAccountForm user={user} />
       </div>
