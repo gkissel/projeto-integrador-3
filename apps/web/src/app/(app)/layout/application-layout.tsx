@@ -1,8 +1,8 @@
 import { ChevronUpIcon, UserCircleIcon } from '@heroicons/react/16/solid'
 import { HomeIcon } from '@heroicons/react/20/solid'
-import { LogOut } from 'lucide-react'
+import { BadgeDollarSign, LogOut } from 'lucide-react'
 
-import { auth } from '@/auth/auth'
+import { auth, getCurrentOrg } from '@/auth/auth'
 import { Avatar } from '@/components/catalyst/avatar'
 import {
   Dropdown,
@@ -32,6 +32,9 @@ import { SidebarLayout } from '@/components/catalyst/sidebar-layout'
 import { OrganizationSwitcher } from '@/components/organization-switcher'
 
 import NavItem from './nav-item'
+
+
+
 
 function getInitials(name: string): string {
   const initials = name
@@ -71,6 +74,8 @@ export async function ApplicationLayout({
   children: React.ReactNode
 }) {
   const { user } = await auth()
+
+  const currentOrg = getCurrentOrg()
   return (
     <SidebarLayout
       navbar={
@@ -131,13 +136,13 @@ export async function ApplicationLayout({
           </SidebarHeader>{' '}
           <SidebarBody>
             <SidebarSection>
-              <NavItem href='/'>
+              <NavItem href={`/org/${currentOrg}`}>
                 <HomeIcon />
                 <SidebarLabel>Início</SidebarLabel>
               </NavItem>
-              <NavItem href='accounts'>
-                <HomeIcon />
-                <SidebarLabel>Home</SidebarLabel>
+              <NavItem href={`/org/${currentOrg}/accounts`}>
+                <BadgeDollarSign />
+                <SidebarLabel>Contas</SidebarLabel>
               </NavItem>
               {/* <NavItem href='/events'>
                 <Square2StackIcon />
