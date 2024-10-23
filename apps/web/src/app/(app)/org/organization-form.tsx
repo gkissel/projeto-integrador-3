@@ -43,7 +43,8 @@ export function OrganizationForm({
       {success === false && message && (
         <Alert variant='destructive'>
           <AlertTriangle className='size-4' />
-          <AlertTitle>Save organization failed!</AlertTitle>
+          <AlertTitle>
+          Falha ao salvar organização!</AlertTitle>
           <AlertDescription>
             <p>{message}</p>
           </AlertDescription>
@@ -53,7 +54,7 @@ export function OrganizationForm({
       {success === true && message && (
         <Alert variant='success'>
           <AlertTriangle className='size-4' />
-          <AlertTitle>Success!</AlertTitle>
+          <AlertTitle>Sucesso!</AlertTitle>
           <AlertDescription>
             <p>{message}</p>
           </AlertDescription>
@@ -61,7 +62,8 @@ export function OrganizationForm({
       )}
 
       <div className='space-y-1'>
-        <Label htmlFor='name'>Organization name</Label>
+        <Label htmlFor='name'>
+        Nome da organização</Label>
         <Input name='name' id='name' defaultValue={initialData?.name} />
 
         {errors?.name && (
@@ -72,7 +74,7 @@ export function OrganizationForm({
       </div>
 
       <div className='space-y-1'>
-        <Label htmlFor='domain'>E-mail domain</Label>
+        <Label htmlFor='domain'>E-mail</Label>
         <Input
           name='domain'
           type='text'
@@ -100,11 +102,10 @@ export function OrganizationForm({
           </div>
           <label htmlFor='shouldAttachUsersByDomain' className='space-y-1'>
             <span className='text-sm font-medium leading-none'>
-              Auto-join new members
+            Junte-se automaticamente a novos membros
             </span>
             <p className='text-sm text-muted-foreground'>
-              This will automatically invite all members with same e-mail domain
-              to this organization.
+            Isso convidará automaticamente todos os membros com o mesmo domínio de e-mail para esta organização.
             </p>
           </label>
         </div>
@@ -116,11 +117,11 @@ export function OrganizationForm({
         )}
       </div>
 
-      <Button className='w-full' type='submit' disabled={isPending}>
+      <Button className='w-full bg-indigo-500'type='submit' disabled={isPending}>
         {isPending ? (
           <Loader2 className='size-4 animate-spin' />
         ) : (
-          'Save organization'
+          'Salvar organização'
         )}
       </Button>
     </form>

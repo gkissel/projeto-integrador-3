@@ -6,17 +6,23 @@ import { z } from 'zod'
 import { signUp } from '@/http/user/create-user'
 
 const signUpSchema = z.object({
-  firstName: z.string(),
-  lastName: z.string(),
-
-  telephone: z.string(),
-  birthdate: z.coerce.date(),
-  email: z
+  firstName: z.string().min(1, { message: 'Nome inválido.' }), 
+  lastName: z.string().min(1, { message: 'Sobrenome inválido.' }),
+  telephone: z.string().refine((val) => val.length === 11 && /^\d+$/.test(val), { 
+    message: 'Número de telefone inválido.' 
+  }),
+  birthdate: z
     .string()
-    .email({ message: 'Please, provide a valid e-mail address.' }),
-  password: z
+    .refine((val) => { 
+      const date = new Date(val);
+      const now = new Date();
+      return !isNaN(date.getTime()) && date < now;
+    }, { message: "Data Inválida." }),
+    email: z
     .string()
-    .min(6, { message: 'Password should have at least 6 characters.' }),
+    .email({ message: 'Por favor, informe um endereço de e-mail válido.' }),password: z
+    .string()
+    .min(6, { message: 'A senha deve ter pelo menos 6 caracteres.' }),
 })
 
 export async function signUpAction(data: FormData) {
@@ -25,6 +31,7 @@ export async function signUpAction(data: FormData) {
   if (!result.success) {
     const errors = result.error.flatten().fieldErrors
 
+    console.error(Object.fromEntries(data))
     console.log(errors)
     return { success: false, message: null, errors }
   }
@@ -32,21 +39,20 @@ export async function signUpAction(data: FormData) {
   const { firstName, lastName, birthdate, telephone, email, password } =
     result.data
 
-  try {
-    await signUp({
-      firstName,
-      lastName,
-      birthdate,
-      telephone,
-      email,
-      password,
-    })
+    try {
+      const birthdateAsDate = new Date(birthdate)
+      await signUp({
+        firstName,
+        lastName,
+        birthdate: birthdateAsDate,
+        telephone,
+        email,
+        password,
+      })
   } catch (err) {
     if (err instanceof HTTPError) {
       console.log(await err.response.body)
       const { message } = await err.response.json()
-
-      // console.log(message)
       return { success: false, message, errors: null }
     }
 
@@ -54,7 +60,7 @@ export async function signUpAction(data: FormData) {
 
     return {
       success: false,
-      message: 'Unexpected error, try again in a few minutes.',
+      message: 'Erro inesperado. Tente novamente em alguns minutos.',
       errors: null,
     }
   }

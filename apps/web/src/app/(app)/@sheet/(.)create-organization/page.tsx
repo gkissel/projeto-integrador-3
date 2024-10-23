@@ -8,7 +8,7 @@ export default function CreateOrganization() {
     <Sheet defaultOpen>
       <InterceptedSheetContent>
         <SheetHeader>
-          <SheetTitle>Create organization</SheetTitle>
+          <SheetTitle>Criar organização</SheetTitle>
         </SheetHeader>
 
         <div className='py-4'>

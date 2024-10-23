@@ -10,8 +10,8 @@ import { signIn } from '@/http/user/sign-in'
 const signInSchema = z.object({
   email: z
     .string()
-    .email({ message: 'Please, provide a valid e-mail address.' }),
-  password: z.string().min(1, { message: 'Please, provide your password.' }),
+    .email({ message: 'Por favor, forneça um endereço de e-mail válido.' }),
+  password: z.string().min(1, { message: 'Por favor, forneça sua senha.' }),
 })
 
 export async function signInWithEmailAndPassword(data: FormData) {
@@ -48,7 +48,6 @@ export async function signInWithEmailAndPassword(data: FormData) {
     }
   } catch (err) {
     if (err instanceof HTTPError) {
-      // console.log(await err.response.text())
       const { message } = await err.response.json()
 
       return { success: false, message, errors: null }
@@ -58,7 +57,7 @@ export async function signInWithEmailAndPassword(data: FormData) {
 
     return {
       success: false,
-      message: 'Unexpected error, try again in a few minutes.',
+      message: 'Erro inesperado. Tente novamente em alguns minutos.',
       errors: null,
     }
   }

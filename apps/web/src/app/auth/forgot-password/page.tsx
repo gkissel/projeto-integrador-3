@@ -13,11 +13,11 @@ export default function ForgotPasswordPage() {
       </div>
 
       <Button className='w-full' type='submit'>
-        Recover password
+        Recuperar senha
       </Button>
 
       <Button className='w-full' variant='link' size='sm' asChild>
-        <Link href='/auth/sign-in'>Sign in instead</Link>
+        <Link href='/auth/sign-in'>Em vez disso, faça login</Link>
       </Button>
     </form>
   )

@@ -25,14 +25,13 @@ export default function DeleteAccountButton() {
         onClick={() => {
           setIsOpen(true)
         }}
-      >
-        Delete Account
+      >Excluir conta
       </Button>
 
       <Dialog open={isOpen} onClose={setIsOpen}>
-        <DialogTitle>Delete Account</DialogTitle>
+        <DialogTitle>Excluir conta</DialogTitle>
         <DialogDescription>
-          This will delete your account. This action cannot be undone.
+Isso excluirá sua conta. Esta ação não pode ser desfeita.
         </DialogDescription>
 
         <DialogActions>
@@ -41,14 +40,14 @@ export default function DeleteAccountButton() {
             onClick={() => setIsOpen(false)}
             className='cursor-pointer'
           >
-            Cancel
+            Cancelar
           </Button>
           <Button
             color='red'
             onClick={handleDeleteAccount}
             className='cursor-pointer'
           >
-            Delete Account
+            Excluir conta
           </Button>
         </DialogActions>
       </Dialog>
