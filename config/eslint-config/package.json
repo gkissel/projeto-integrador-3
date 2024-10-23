@@ -11,7 +11,7 @@
     "@repo/prettier": "workspace:*",
     "@rocketseat/eslint-config": "^2.2.2",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-next": "^14.2.5",
+    "eslint-config-next": "^14.2.16",
     "eslint-plugin-simple-import-sort": "^12.1.1"
   },
   "prettier": "@repo/prettier",
@@ -21,9 +21,9 @@
     ]
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.6.0",
-    "@typescript-eslint/parser": "^8.6.0",
-    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^8.11.0",
+    "@typescript-eslint/parser": "^8.11.0",
+    "eslint": "^8.57.1",
     "eslint-plugin-drizzle": "^0.2.3"
   }
 }
