@@ -28,25 +28,25 @@ export function SignInForm() {
   )
 
   return (
-    <div className='mx-auto grid w-full max-w-sm space-y-14'>
-      <div className='flex items-center gap-2'>
-        <div className='relative h-24 w-24 rounded-full border p-4'>
-          <Image src={Logo} alt='' fill className='rounded-full' />
+    <div className='mx-auto flex flex-col gap-16 w-full max-w-sm mt-7'>
+      <div className='flex items-center h-fit mt-24 relative'>
+        <div className='p-1 h-24 w-24'>
+          <Image src={Logo} alt='' width={96} height={96} className='w-20' />
         </div>
-        <strong className='text-3xl font-bold'>SafeBudget</strong>
+        <strong className='text-4xl font-bold absolute left-20'>SafeBudget</strong>
       </div>
       <div className='space-y-4'>
         <div className='flex flex-col gap-2'>
-          <Heading className='!text-4xl'>Login</Heading>
+          <Heading className='!text-3xl'>Entrar</Heading>
           <Text className='text-sm font-medium'>
-            Welcome back! Please enter your details
+          Bem-vindo de volta! Por favor insira seus dados
           </Text>
         </div>
         <form onSubmit={handleSubmit} className='w-full space-y-4 lg:min-w-96'>
           {success === false && message && (
             <Alert variant='destructive'>
               <AlertTriangle className='size-4' />
-              <AlertTitle>Sign in failed!</AlertTitle>
+              <AlertTitle>Falha no login!</AlertTitle>
               <AlertDescription>
                 <p>{message}</p>
               </AlertDescription>
@@ -70,7 +70,7 @@ export function SignInForm() {
           </Field>
 
           <Field className='space-y-1'>
-            <Label htmlFor='password'>Password</Label>
+            <Label htmlFor='password'>Senha</Label>
             <Input name='password' type='password' id='password' />
 
             {errors?.password && (
@@ -84,20 +84,20 @@ export function SignInForm() {
             href='/auth/forgot-password'
             className='text-xs font-medium text-foreground hover:underline'
           >
-            Forgot your password?
+            Esqueceu sua senha?
           </Link>
 
           <Button className='w-full' type='submit' disabled={isPending}>
             {isPending ? (
               <Loader2 className='size-4 animate-spin' />
             ) : (
-              'Sign in with e-mail'
+              'Entrar'
             )}
           </Button>
 
-          <div className='flex items-baseline gap-4 text-sm'>
-            <Text>Don&apos;t have an account? </Text>
-            <TextLink href='/auth/sign-up'>Sign up</TextLink>
+          <div className='flex items-baseline gap-2 text-sm'>
+            <Text>Já possui uma conta?</Text>
+            <TextLink href='/auth/sign-up'>Cadastrar</TextLink>
           </div>
         </form>
       </div>

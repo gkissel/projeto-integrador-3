@@ -38,7 +38,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
     currentUserEmail === invite.email
 
   async function signInFromInvite() {
-    'use server'
+    'usar servidor'
 
     cookies().set('inviteId', inviteId)
 
@@ -46,7 +46,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
   }
 
   async function acceptInviteAction() {
-    'use server'
+    'usar servidor'
 
     await acceptInvite(inviteId)
 
@@ -66,9 +66,9 @@ export default async function InvitePage({ params }: InvitePageProps) {
 
           <p className='text-balance text-center leading-relaxed text-muted-foreground'>
             <span className='font-medium text-foreground'>
-              {invite.author?.name ?? 'Someone'}
+              {invite.author?.name ?? 'Alguém'}
             </span>{' '}
-            invited you to join{' '}
+            convidei você para participar{' '}
             <span className='font-medium text-foreground'>
               {invite.organization.name}
             </span>
@@ -83,7 +83,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
           <form action={signInFromInvite}>
             <Button type='submit' variant='secondary' className='w-full'>
               <LogIn className='mr-2 size-4' />
-              Sign in to accept the invite
+              Faça login para aceitar o convite
             </Button>
           </form>
         )}
@@ -92,7 +92,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
           <form action={acceptInviteAction}>
             <Button type='submit' variant='secondary' className='w-full'>
               <CheckCircle className='mr-2 size-4' />
-              Join {invite.organization.name}
+              Juntar-se {invite.organization.name}
             </Button>
           </form>
         )}
@@ -100,11 +100,11 @@ export default async function InvitePage({ params }: InvitePageProps) {
         {isUserAuthenticated && !userIsAuthenticatedWithSameEmailFromInvite && (
           <div className='space-y-4'>
             <p className='text-balance text-center text-sm leading-relaxed text-muted-foreground'>
-              This invite was sent to{' '}
+              Este convite foi enviado para{' '}
               <span className='font-medium text-foreground'>
                 {invite.email}
               </span>{' '}
-              but you are currently authenticated as{' '}
+              mas você está atualmente autenticado como{' '}
               <span className='font-medium text-foreground'>
                 {currentUserEmail}
               </span>
@@ -115,12 +115,12 @@ export default async function InvitePage({ params }: InvitePageProps) {
               <Button className='w-full' variant='secondary' asChild>
                 <a href='/api/auth/sign-out'>
                   <LogOut className='mr-2 size-4' />
-                  Sign out from {currentUserEmail}
+                  Sair de {currentUserEmail}
                 </a>
               </Button>
 
               <Button className='w-full' variant='outline' asChild>
-                <Link href='/'>Back to dashboard</Link>
+                <Link href='/'>Voltar ao painel</Link>
               </Button>
             </div>
           </div>

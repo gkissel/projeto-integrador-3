@@ -32,24 +32,24 @@ export function SignUpForm() {
   )
 
   return (
-    <div className='space-y-14'>
-      <div className='flex items-center gap-2'>
-        <div className='relative h-24 w-24 rounded-full border p-4'>
-          <Image src={Logo} alt='' fill className='rounded-full' />
+    <div className='mx-auto flex flex-col gap-16 w-full max-w-sm'>
+      <div className='flex items-center h-fit relative '>
+        <div className='p-1 h-24 w-24'>
+          <Image src={Logo} alt='' width={96} height={96} className='w-20' />
         </div>
-        <strong className='text-3xl font-bold'>SafeBudget</strong>
+        <strong className='text-4xl font-bold absolute left-20'>SafeBudget</strong>
       </div>
       <div className='space-y-4'>
         <div className='flex flex-col gap-2'>
-          <Heading className='!text-4xl'>Sign up</Heading>
-          <Text className='text-sm font-medium'>Please enter your details</Text>
+          <Heading className='!text-3xl'>Inscrever-se</Heading>
+          <Text className='text-sm font-medium'>Por favor insira seus dados</Text>
         </div>
         <form onSubmit={handleSubmit} className='space-y-4'>
           <Fieldset className='space-y-4'>
             {success === false && message && (
               <Alert variant='destructive'>
                 <AlertTriangle className='size-4' />
-                <AlertTitle>Sign up failed!</AlertTitle>
+                <AlertTitle>Falha na inscrição!</AlertTitle>
                 <AlertDescription>
                   <p>{message}</p>
                 </AlertDescription>
@@ -58,7 +58,7 @@ export function SignUpForm() {
 
             <FieldGroup className='flex gap-2 !space-y-0'>
               <Field className='space-y-1'>
-                <Label htmlFor='firstName'>First Name</Label>
+                <Label htmlFor='firstName'>Primeiro nome</Label>
                 <Input name='firstName' id='firstName' />
 
                 {errors?.firstName && (
@@ -69,12 +69,12 @@ export function SignUpForm() {
               </Field>
 
               <Field className='space-y-1'>
-                <Label htmlFor='lastName'>Last Name</Label>
+                <Label htmlFor='lastName'>Sobrenome</Label>
                 <Input name='lastName' id='lastName' />
 
                 {errors?.firstName && (
                   <ErrorMessage className='text-xs font-medium text-red-500 dark:text-red-400'>
-                    {errors.firstName[0]}
+                    {errors.lastName[0]}
                   </ErrorMessage>
                 )}
               </Field>
@@ -82,11 +82,15 @@ export function SignUpForm() {
 
             <FieldGroup className='grid grid-cols-2 justify-between gap-2 !space-y-0'>
               <Field className='space-y-1'>
-                <Label htmlFor='birthdate'>Date of birth</Label>
+                <Label htmlFor='birthdate'>Data de nascimento</Label>
                 <Input
                   name='birthdate'
                   id='birthdate'
                   type='date'
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                  }}
+                 
                   className='w-full min-w-48 max-w-xs'
                 />
 
@@ -98,13 +102,12 @@ export function SignUpForm() {
               </Field>
 
               <Field className='space-y-1'>
-                <Label htmlFor='phone'>Phone Number</Label>
+                <Label htmlFor='phone'>Número de celular</Label>
                 <Input
                   name='telephone'
                   id='telephone'
                   type='tel'
-                  placeholder='13-94569-7890'
-                  required
+                  placeholder='(13) 94569-7890'
                 />
 
                 {errors?.telephone && (
@@ -127,8 +130,8 @@ export function SignUpForm() {
             </Field>
 
             <Field className='space-y-1'>
-              <Label htmlFor='password'>Password</Label>
-              <Input name='password' type='password' id='password' />
+              <Label htmlFor='password'>Senha</Label>
+              <Input name='password' type='password' id='password'  />
 
               {errors?.password && (
                 <ErrorMessage className='text-xs font-medium text-red-500 dark:text-red-400'>
@@ -141,13 +144,13 @@ export function SignUpForm() {
               {isPending ? (
                 <Loader2 className='size-4 animate-spin' />
               ) : (
-                'Create account'
+                'Criar conta'
               )}
             </Button>
 
             <div className='flex gap-1'>
-              <Text>Have an account? </Text>
-              <TextLink href='/auth/sign-in'> Sign In</TextLink>
+              <Text>Já possui conta? </Text>
+              <TextLink href='/auth/sign-in'>Entrar</TextLink>
             </div>
           </Fieldset>
         </form>
