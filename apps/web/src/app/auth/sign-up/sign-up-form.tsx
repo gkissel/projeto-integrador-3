@@ -21,7 +21,7 @@ import { useFormState } from '@/hooks/use-form-state'
 import Logo from '../../../../public/logo.png'
 import { signUpAction } from './actions'
 
-export function SignUpForm() {
+export default function SignUpForm() {
   const router = useRouter()
 
   const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
@@ -32,17 +32,21 @@ export function SignUpForm() {
   )
 
   return (
-    <div className='mx-auto flex flex-col gap-16 w-full max-w-sm'>
-      <div className='flex items-center h-fit relative '>
-        <div className='p-1 h-24 w-24'>
+    <div className='mx-auto flex w-full max-w-sm flex-col gap-16'>
+      <div className='relative flex h-fit items-center'>
+        <div className='h-24 w-24 p-1'>
           <Image src={Logo} alt='' width={96} height={96} className='w-20' />
         </div>
-        <strong className='text-4xl font-bold absolute left-20'>SafeBudget</strong>
+        <strong className='absolute left-20 text-4xl font-bold'>
+          SafeBudget
+        </strong>
       </div>
       <div className='space-y-4'>
         <div className='flex flex-col gap-2'>
           <Heading className='!text-3xl'>Inscrever-se</Heading>
-          <Text className='text-sm font-medium'>Por favor insira seus dados</Text>
+          <Text className='text-sm font-medium'>
+            Por favor insira seus dados
+          </Text>
         </div>
         <form onSubmit={handleSubmit} className='space-y-4'>
           <Fieldset className='space-y-4'>
@@ -88,9 +92,8 @@ export function SignUpForm() {
                   id='birthdate'
                   type='date'
                   onChange={(e) => {
-                    console.log(e.target.value);
+                    console.log(e.target.value)
                   }}
-                 
                   className='w-full min-w-48 max-w-xs'
                 />
 
@@ -131,7 +134,7 @@ export function SignUpForm() {
 
             <Field className='space-y-1'>
               <Label htmlFor='password'>Senha</Label>
-              <Input name='password' type='password' id='password'  />
+              <Input name='password' type='password' id='password' />
 
               {errors?.password && (
                 <ErrorMessage className='text-xs font-medium text-red-500 dark:text-red-400'>

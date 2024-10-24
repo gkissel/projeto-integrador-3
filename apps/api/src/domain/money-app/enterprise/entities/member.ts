@@ -12,8 +12,8 @@ export interface MemberProps {
   orgId: UniqueEntityID
   userId: UniqueEntityID
 
-  createdAt?: Date
-  updatedAt?: Date
+  createdAt?: Date | null
+  updatedAt?: Date | null
 }
 
 export class Member extends Entity<MemberProps> {

@@ -11,6 +11,7 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { env } from './infra/env'
+import { createOrganization } from './infra/http/controllers/organization/create-organization.controller'
 import { authenticateWithPassword } from './infra/http/controllers/user/authenticate-user.controller'
 import { createAccount } from './infra/http/controllers/user/create-user.controller'
 import { deleteProfile } from './infra/http/controllers/user/delete-user.controller'
@@ -60,3 +61,4 @@ app.register(authenticateWithPassword)
 app.register(getProfile)
 app.register(updateProfile)
 app.register(deleteProfile)
+app.register(createOrganization)

@@ -1,9 +1,6 @@
 import dynamic from 'next/dynamic'
 
-const SignInForm = dynamic(
-  () => import('./sign-in-form').then((mod) => mod.SignInForm),
-  {},
-)
+const SignInForm = dynamic(() => import('./sign-in-form'), {})
 
 const FeatureCarousel = dynamic(() => import('../components/feature-carousel'))
 

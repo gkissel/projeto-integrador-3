@@ -17,7 +17,7 @@ import { Text } from './catalyst/text'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 
 export async function OrganizationSwitcher() {
-  const currentOrg = getCurrentOrg()
+  const currentOrg = await getCurrentOrg()
 
   const { organizations } = await getOrganizations()
 
