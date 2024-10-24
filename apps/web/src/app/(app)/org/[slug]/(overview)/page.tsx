@@ -13,9 +13,7 @@ import {
 } from '@/components/catalyst/table'
 import { Strong } from '@/components/catalyst/text'
 
-const OverviewSlider = dynamic(() =>
-  import('./components/overview-slider').then((mod) => mod.OverviewSlider),
-)
+const OverviewSlider = dynamic(() => import('./components/overview-slider'))
 
 export default async function Overview() {
   // const currentOrg = getCurrentOrg()

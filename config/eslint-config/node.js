@@ -1,10 +1,6 @@
 /** @type { import('eslint').Linter.Config } */
 module.exports = {
-  extends: [
-    'airbnb',
-    '@rocketseat/eslint-config/node',
-    'plugin:drizzle/recommended',
-  ],
+  extends: ['@rocketseat/eslint-config/node', 'plugin:drizzle/recommended'],
   plugins: ['simple-import-sort', 'drizzle'],
   rules: {
     'simple-import-sort/imports': 'error',

@@ -1,9 +1,6 @@
 import dynamic from 'next/dynamic'
 
-const SignUpForm = dynamic(
-  () => import('./sign-up-form').then((mod) => mod.SignUpForm),
-  {},
-)
+const SignUpForm = dynamic(() => import('./sign-up-form'), {})
 
 const FeatureCarousel = dynamic(() => import('../components/feature-carousel'))
 

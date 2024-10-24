@@ -164,7 +164,16 @@ export const SidebarItem = forwardRef(function SidebarItem(
       {current && (
         <motion.span
           layoutId='current-indicator'
-          className='absolute inset-y-2 -left-4 w-0.5 rounded-full bg-zinc-950 dark:bg-white'
+          style={{
+            position: 'absolute',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            left: '-1.5rem',
+            width: '0.5rem',
+            borderRadius: '0.25rem',
+            backgroundColor: 'rgb(75 85 99)',
+          }}
+          // className='absolute inset-y-2 -left-4 w-0.5 rounded-full bg-zinc-950 dark:bg-white'
         />
       )}
       {'href' in props ? (

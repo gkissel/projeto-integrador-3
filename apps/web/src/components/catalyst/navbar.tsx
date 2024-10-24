@@ -94,8 +94,16 @@ export const NavbarItem = forwardRef(function NavbarItem(
     <span className={clsx(className, 'relative')}>
       {current && (
         <motion.span
+          style={{
+            position: 'absolute',
+            inset: '0, 0, 0, 2',
+            bottom: '-2.5',
+            height: '0.5',
+            borderRadius: 'full',
+            backgroundColor: 'bg-white',
+          }}
           layoutId='current-indicator'
-          className='absolute inset-x-2 -bottom-2.5 h-0.5 rounded-full bg-zinc-950 dark:bg-white'
+          // className='absolute inset-x-2 -bottom-2.5 h-0.5 rounded-full bg-zinc-950 dark:bg-white'
         />
       )}
       {'href' in props ? (

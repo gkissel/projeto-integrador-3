@@ -59,8 +59,7 @@ export default function UpdateAccountForm({
         <section className='grid gap-x-8 gap-y-6 sm:grid-cols-2'>
           <div className='space-y-1'>
             <Subheading>Nome</Subheading>
-            <Text>
-            Isso será exibido em seu perfil público.</Text>
+            <Text>Isso será exibido em seu perfil público.</Text>
           </div>
           <div>
             <FieldGroup className='flex gap-2 !space-y-0'>
@@ -172,9 +171,9 @@ export default function UpdateAccountForm({
 
         <Divider className='my-10' />
 
-        <div className='flex items-center flex-col lg:flex-row gap-4 lg:justify-between pt-4'>
+        <div className='flex flex-col items-center gap-4 pt-4 lg:flex-row lg:justify-between'>
           <DeleteAccountButton />
-          <div className='flex justify-end gap-4 lg:flex-row flex-col w-full lg:w-fit'>
+          <div className='flex w-full flex-col justify-end gap-4 lg:w-fit lg:flex-row'>
             <Button
               type='reset'
               plain
@@ -185,7 +184,12 @@ export default function UpdateAccountForm({
             >
               Restaurar
             </Button>
-            <Button type='submit' color='indigo' disabled={isPending}  className='w-full lg:w-fit' >
+            <Button
+              type='submit'
+              color='indigo'
+              disabled={isPending}
+              className='w-full lg:w-fit'
+            >
               {isPending ? (
                 <Loader2 className='size-4 animate-spin' />
               ) : (
