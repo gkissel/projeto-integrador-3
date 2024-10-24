@@ -15,20 +15,18 @@ import { getInvite } from '@/http/get-invite'
 dayjs.extend(relativeTime)
 
 interface InvitePageProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
 export default async function InvitePage({ params }: InvitePageProps) {
-  const inviteId = params.id
+  const inviteId = (await params).id
 
   const { invite } = await getInvite(inviteId)
   const isUserAuthenticated = isAuthenticated()
 
   let currentUserEmail = null
 
-  if (isUserAuthenticated) {
+  if (await isUserAuthenticated) {
     const { user } = await auth()
 
     currentUserEmail = user.email
@@ -38,15 +36,16 @@ export default async function InvitePage({ params }: InvitePageProps) {
     currentUserEmail === invite.email
 
   async function signInFromInvite() {
-    'usar servidor'
+    'use server'
 
-    cookies().set('inviteId', inviteId)
+    // eslint-disable-next-line prettier/prettier
+    ;(await cookies()).set('inviteId', inviteId)
 
     redirect(`/auth/sign-in?email=${invite.email}`)
   }
 
   async function acceptInviteAction() {
-    'usar servidor'
+    'use server'
 
     await acceptInvite(inviteId)
 
@@ -97,34 +96,35 @@ export default async function InvitePage({ params }: InvitePageProps) {
           </form>
         )}
 
-        {isUserAuthenticated && !userIsAuthenticatedWithSameEmailFromInvite && (
-          <div className='space-y-4'>
-            <p className='text-balance text-center text-sm leading-relaxed text-muted-foreground'>
-              Este convite foi enviado para{' '}
-              <span className='font-medium text-foreground'>
-                {invite.email}
-              </span>{' '}
-              mas você está atualmente autenticado como{' '}
-              <span className='font-medium text-foreground'>
-                {currentUserEmail}
-              </span>
-              .
-            </p>
+        {(await isUserAuthenticated) &&
+          !userIsAuthenticatedWithSameEmailFromInvite && (
+            <div className='space-y-4'>
+              <p className='text-balance text-center text-sm leading-relaxed text-muted-foreground'>
+                Este convite foi enviado para{' '}
+                <span className='font-medium text-foreground'>
+                  {invite.email}
+                </span>{' '}
+                mas você está atualmente autenticado como{' '}
+                <span className='font-medium text-foreground'>
+                  {currentUserEmail}
+                </span>
+                .
+              </p>
 
-            <div className='space-y-2'>
-              <Button className='w-full' variant='secondary' asChild>
-                <a href='/api/auth/sign-out'>
-                  <LogOut className='mr-2 size-4' />
-                  Sair de {currentUserEmail}
-                </a>
-              </Button>
+              <div className='space-y-2'>
+                <Button className='w-full' variant='secondary' asChild>
+                  <a href='/api/auth/sign-out'>
+                    <LogOut className='mr-2 size-4' />
+                    Sair de {currentUserEmail}
+                  </a>
+                </Button>
 
-              <Button className='w-full' variant='outline' asChild>
-                <Link href='/'>Voltar ao painel</Link>
-              </Button>
+                <Button className='w-full' variant='outline' asChild>
+                  <Link href='/'>Voltar ao painel</Link>
+                </Button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     </div>
   )
