@@ -2,22 +2,20 @@ import { api } from '../api-client'
 
 interface CreateOrganizationRequest {
   name: string
-  domain: string | null
-  shouldAttachUsersByDomain: boolean
 }
 
-type CreateOrganizationResponse = void
+type CreateOrganizationResponse = {
+  id: string
+}
 
 export async function createOrganization({
   name,
-  domain,
-  shouldAttachUsersByDomain,
 }: CreateOrganizationRequest): Promise<CreateOrganizationResponse> {
-  await api.post('organizations', {
+  const id = await api.post<CreateOrganizationResponse>('organizations', {
     json: {
       name,
-      domain,
-      shouldAttachUsersByDomain,
     },
   })
+
+  return id.json()
 }

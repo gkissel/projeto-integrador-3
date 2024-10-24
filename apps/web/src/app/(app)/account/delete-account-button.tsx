@@ -21,17 +21,19 @@ export default function DeleteAccountButton() {
   return (
     <>
       <Button
-        color='red'  className='w-full lg:w-fit'
+        color='red'
+        className='w-full lg:w-fit'
         onClick={() => {
           setIsOpen(true)
         }}
-      >Excluir conta
+      >
+        Excluir conta
       </Button>
 
       <Dialog open={isOpen} onClose={setIsOpen}>
         <DialogTitle>Excluir conta</DialogTitle>
         <DialogDescription>
-Isso excluirá sua conta. Esta ação não pode ser desfeita.
+          Isso excluirá sua conta. Esta ação não pode ser desfeita.
         </DialogDescription>
 
         <DialogActions>

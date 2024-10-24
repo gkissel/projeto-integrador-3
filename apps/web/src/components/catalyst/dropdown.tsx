@@ -165,8 +165,8 @@ export function DropdownLabel({
 }: { className?: string } & Omit<Headless.LabelProps, 'as' | 'className'>) {
   return (
     <Headless.Label
-      {...props}
       data-slot='label'
+      {...props}
       className={clsx(className, 'col-start-2 row-start-1')}
       {...props}
     />

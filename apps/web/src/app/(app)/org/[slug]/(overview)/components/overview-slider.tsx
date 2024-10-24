@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { Strong, Text } from '@/components/catalyst/text'
 
-export const OverviewSlider: React.FC = () => {
+const OverviewSlider: React.FC = () => {
   return (
     <Swiper
       slidesPerView='auto'
@@ -89,3 +89,5 @@ export const OverviewSlider: React.FC = () => {
     </Swiper>
   )
 }
+
+export default OverviewSlider
