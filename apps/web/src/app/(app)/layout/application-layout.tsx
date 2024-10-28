@@ -33,7 +33,7 @@ import { OrganizationSwitcher } from '@/components/organization-switcher'
 
 import NavItem from './nav-item'
 
-function getInitials(name: string): string {
+export function getInitials(name: string): string {
   const initials = name
     .split(' ')
     .map((word) => word.charAt(0).toUpperCase())

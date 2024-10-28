@@ -1,8 +1,10 @@
 import { ChevronsUpDown, PlusCircle } from 'lucide-react'
 
+import { getInitials } from '@/app/(app)/layout/application-layout'
 import { getCurrentOrg } from '@/auth/auth'
 import { getOrganizations } from '@/http/organization/get-organizations'
 
+import { Avatar } from './catalyst/avatar'
 import {
   Dropdown,
   DropdownButton,
@@ -14,7 +16,6 @@ import {
 } from './catalyst/dropdown'
 import { SidebarItem } from './catalyst/sidebar'
 import { Text } from './catalyst/text'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 
 export async function OrganizationSwitcher() {
   const currentOrg = await getCurrentOrg()
@@ -30,12 +31,10 @@ export async function OrganizationSwitcher() {
       <DropdownButton as={SidebarItem}>
         {currentOrganization ? (
           <>
-            <Avatar className='size-4'>
-              {currentOrganization.avatarUrl && (
-                <AvatarImage src={currentOrganization.avatarUrl} />
-              )}
-              <AvatarFallback />
-            </Avatar>
+            <Avatar
+              className='size-4'
+              initials={getInitials(currentOrganization.name)}
+            />
             <Text className='truncate text-left'>
               {currentOrganization.name}
             </Text>
@@ -58,15 +57,10 @@ export async function OrganizationSwitcher() {
                 key={organization.id}
                 href={`/org/${organization.slug}`}
               >
-                <Avatar className='mr-2 size-4'>
-                  {organization.avatarUrl && (
-                    <AvatarImage
-                      src={organization.avatarUrl}
-                      title={organization.name}
-                    />
-                  )}
-                  <AvatarFallback />
-                </Avatar>
+                <Avatar
+                  className='mr-2 size-4'
+                  initials={getInitials(organization.name)}
+                />
                 <Text className='line-clamp-1'>{organization.name}</Text>
               </DropdownItem>
             )

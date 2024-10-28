@@ -31,4 +31,15 @@ export class DrizzleOrganizationMapper {
       updatedAt: organization.updatedAt || null,
     }
   }
+
+  static toHTTP(organization: Organization) {
+    return {
+      id: organization.id.toString(),
+      name: organization.name,
+      slug: organization.slug.value,
+      ownerId: organization.ownerId?.toString(),
+      createdAt: organization.createdAt,
+      updatedAt: organization.updatedAt,
+    }
+  }
 }
