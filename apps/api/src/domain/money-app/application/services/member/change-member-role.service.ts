@@ -1,27 +1,26 @@
 import { Either, left, right } from '@/core/either'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { NotAllowedError } from '@/core/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
-import { Member, ROLES } from '@/domain/money-app/enterprise/entities/member'
+import { ROLES } from '@/domain/money-app/enterprise/entities/member'
 
 import MembersRepository from '../../repositories/abstract/members.repository'
 import OrganizationsRepository from '../../repositories/abstract/organizations.repository'
 import { UsersRepository } from '../../repositories/abstract/users.repository'
-import { EntityAlreadyExistsError } from '../errors/entity-already-exists-error'
 
-export interface CreateMemberServiceRequest {
+export interface ChangeMemberRoleServiceRequest {
+  memberId: string
+  updatedRole: ROLES[keyof ROLES]
   organizationId: string
   userId: string
-  role: ROLES[keyof ROLES]
 }
 
-type CreateMemberServiceResponse = Either<
-  EntityAlreadyExistsError | ResourceNotFoundError,
-  {
-    member: Member
-  }
+type ChangeMemberRoleServiceResponse = Either<
+  ResourceNotFoundError | NotAllowedError,
+  object
 >
 
-export class CreateMemberService {
+export class ChangeMemberRoleService {
   constructor(
     private membersRepository: MembersRepository,
     private usersRepository: UsersRepository,
@@ -29,10 +28,11 @@ export class CreateMemberService {
   ) {}
 
   async execute({
-    organizationId,
+    memberId,
     userId,
-    role,
-  }: CreateMemberServiceRequest): Promise<CreateMemberServiceResponse> {
+    organizationId,
+    updatedRole,
+  }: ChangeMemberRoleServiceRequest): Promise<ChangeMemberRoleServiceResponse> {
     const organization =
       await this.organizationsRepository.findById(organizationId)
 
@@ -50,28 +50,28 @@ export class CreateMemberService {
       new UniqueEntityID(userId),
     )
 
-    let isSameOrganization: boolean = false
+    const userMember = membersOfSameUser
+      .filter((member) => member.orgId.equals(organization.id))
+      .find((member) => member.userId.equals(user.id))
 
-    membersOfSameUser.forEach((member) => {
-      if (member.orgId.equals(new UniqueEntityID(organizationId))) {
-        isSameOrganization = true
-      }
-    })
-
-    if (isSameOrganization) {
-      return left(new EntityAlreadyExistsError('member'))
+    if (!userMember) {
+      return left(new NotAllowedError())
     }
 
-    const member = Member.create({
-      orgId: new UniqueEntityID(organizationId),
-      userId: new UniqueEntityID(userId),
-      role,
-    })
+    if (!userMember.hasPermission('ADMIN')) {
+      return left(new NotAllowedError())
+    }
 
-    await this.membersRepository.create(member)
+    const member = await this.membersRepository.findById(memberId)
 
-    return right({
-      member,
-    })
+    if (!member) {
+      return left(new ResourceNotFoundError())
+    }
+
+    member.role = updatedRole
+
+    await this.membersRepository.update(member)
+
+    return right({})
   }
 }

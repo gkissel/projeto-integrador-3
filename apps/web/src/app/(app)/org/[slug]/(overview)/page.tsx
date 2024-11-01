@@ -1,6 +1,7 @@
 import { EllipsisVerticalIcon } from '@heroicons/react/24/solid'
 import dynamic from 'next/dynamic'
 
+import { getCurrentOrg } from '@/auth/auth'
 import { Button } from '@/components/catalyst/button'
 import { Divider } from '@/components/catalyst/divider'
 import {
@@ -16,8 +17,7 @@ import { Strong } from '@/components/catalyst/text'
 const OverviewSlider = dynamic(() => import('./components/overview-slider'))
 
 export default async function Overview() {
-  // const currentOrg = getCurrentOrg()
-  // const permissions = await ability()
+  const currentOrg = await getCurrentOrg()
 
   return (
     <div className='space-y-8'>

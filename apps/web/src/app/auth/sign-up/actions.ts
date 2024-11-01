@@ -55,7 +55,7 @@ export async function signUpAction(data: FormData) {
     })
   } catch (err) {
     if (err instanceof HTTPError) {
-      console.log(await err.response.body)
+      // console.log(await err.response.body)
       const { message } = await err.response.json()
       return { success: false, message, errors: null }
     }
