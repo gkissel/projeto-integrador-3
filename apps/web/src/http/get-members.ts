@@ -5,11 +5,9 @@ import { api } from './api-client'
 interface GetMembersResponse {
   members: {
     id: string
-    userId: string
     role: Role
-    name: string | null
-    email: string
-    avatarUrl: string | null
+    organizationId: string
+    userId: string
   }[]
 }
 
@@ -21,6 +19,6 @@ export async function getMembers(org: string) {
       },
     })
     .json<GetMembersResponse>()
-
+  // console.log(result)
   return result
 }

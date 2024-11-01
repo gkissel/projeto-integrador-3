@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Divider } from '@/components/catalyst/divider'
 import { Strong, Text } from '@/components/catalyst/text'
 
-export default async function Overview() {
+export default async function Accounts() {
   // const currentOrg = getCurrentOrg()
   // const permissions = await ability()
 

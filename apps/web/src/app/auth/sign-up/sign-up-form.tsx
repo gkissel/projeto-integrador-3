@@ -111,6 +111,8 @@ export default function SignUpForm() {
                   id='telephone'
                   type='tel'
                   placeholder='(13) 94569-7890'
+                  minLength={11}
+                  maxLength={11}
                 />
 
                 {errors?.telephone && (
