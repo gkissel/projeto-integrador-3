@@ -1,4 +1,8 @@
-import { ChevronUpIcon, UserCircleIcon } from '@heroicons/react/16/solid'
+import {
+  ChevronUpIcon,
+  UserCircleIcon,
+  UserGroupIcon,
+} from '@heroicons/react/16/solid'
 import { HomeIcon } from '@heroicons/react/20/solid'
 import { BadgeDollarSign, LogOut } from 'lucide-react'
 
@@ -137,9 +141,15 @@ export async function ApplicationLayout({
                 <HomeIcon />
                 <SidebarLabel>Início</SidebarLabel>
               </NavItem>
+
               <NavItem href={`/org/${currentOrg}/accounts`}>
                 <BadgeDollarSign />
                 <SidebarLabel>Contas</SidebarLabel>
+              </NavItem>
+
+              <NavItem href={`/org/${currentOrg}/members`}>
+                <UserGroupIcon />
+                <SidebarLabel>Membros</SidebarLabel>
               </NavItem>
               {/* <NavItem href='/events'>
                 <Square2StackIcon />

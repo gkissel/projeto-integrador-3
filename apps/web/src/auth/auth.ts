@@ -42,6 +42,16 @@ export async function ability() {
   return ability
 }
 
+export async function currentRole() {
+  const membership = await getCurrentMembership()
+
+  if (!membership) {
+    return null
+  }
+
+  return membership.role
+}
+
 export async function auth() {
   const token = (await cookies()).get('token')?.value
 

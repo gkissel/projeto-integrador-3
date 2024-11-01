@@ -5,6 +5,7 @@ import { Optional } from '@/core/types/optional'
 export interface ROLES {
   ADMIN: 'ADMIN'
   MEMBER: 'MEMBER'
+  OWNER: 'OWNER'
 }
 
 export interface MemberProps {
@@ -17,10 +18,6 @@ export interface MemberProps {
 }
 
 export class Member extends Entity<MemberProps> {
-  get role() {
-    return this.props.role
-  }
-
   get orgId() {
     return this.props.orgId
   }
@@ -29,12 +26,30 @@ export class Member extends Entity<MemberProps> {
     return this.props.userId
   }
 
+  get role() {
+    return this.props.role
+  }
+
   get createdAt() {
     return this.props.createdAt
   }
 
   get updatedAt() {
     return this.props.updatedAt
+  }
+
+  set role(role: ROLES[keyof ROLES]) {
+    this.props.role = role
+
+    this.touch()
+  }
+
+  public hasPermission(role: ROLES[keyof ROLES]) {
+    return this.props.role === role
+  }
+
+  private touch() {
+    this.props.updatedAt = new Date()
   }
 
   static create(

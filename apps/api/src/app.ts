@@ -12,10 +12,13 @@ import {
 
 import { env } from './infra/env'
 import { createOrganization } from './infra/http/controllers/organization/create-organization.controller'
+import { getMembers } from './infra/http/controllers/organization/get-members.controller'
+import { getMembership } from './infra/http/controllers/organization/get-membership.controller'
 import { getOrganizationByUser } from './infra/http/controllers/organization/get-organization-by-user.controller'
 import { authenticateWithPassword } from './infra/http/controllers/user/authenticate-user.controller'
 import { createAccount } from './infra/http/controllers/user/create-user.controller'
 import { deleteProfile } from './infra/http/controllers/user/delete-user.controller'
+import { getUserByID } from './infra/http/controllers/user/get-user-by-id.controller'
 import { getProfile } from './infra/http/controllers/user/get-user-profile.controller'
 import { updateProfile } from './infra/http/controllers/user/update-user.controller'
 import { errorHandler } from './infra/http/error-handler'
@@ -60,7 +63,10 @@ app.register(fastifyCors)
 app.register(createAccount)
 app.register(authenticateWithPassword)
 app.register(getProfile)
+app.register(getUserByID)
 app.register(updateProfile)
 app.register(deleteProfile)
 app.register(createOrganization)
 app.register(getOrganizationByUser)
+app.register(getMembers)
+app.register(getMembership)

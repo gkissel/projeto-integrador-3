@@ -22,6 +22,13 @@
       "when": 1727914362089,
       "tag": "0002_odd_master_chief",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1730335401729,
+      "tag": "0003_optimal_firedrake",
+      "breakpoints": true
     }
   ]
 }

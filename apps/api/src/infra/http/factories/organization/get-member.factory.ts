@@ -1,21 +1,17 @@
-import { CreateOrganizationService } from '@/domain/money-app/application/services/organization/create-organization.service'
+import { GetMembershipService } from '@/domain/money-app/application/services/organization/get-membership.service'
 import { db } from '@/infra/database/postgres/connection.service'
 import DrizzleMembersRepository from '@/infra/database/postgres/repositories/members.drizzle.repository'
 import DrizzleOrganizationsRepository from '@/infra/database/postgres/repositories/organiaztions.drizzle.repository'
-import DrizzleUsersRepository from '@/infra/database/postgres/repositories/users.drizzle.repository'
 
-export function makeCreateOrganizationService() {
+export function makeGetMembershipService() {
   const organizationsRepository = new DrizzleOrganizationsRepository(db)
 
   const membersRepository = new DrizzleMembersRepository(db)
 
-  const usersRepository = new DrizzleUsersRepository(db)
-
-  const createOrganizationService = new CreateOrganizationService(
+  const getMembershipService = new GetMembershipService(
     organizationsRepository,
     membersRepository,
-    usersRepository,
   )
 
-  return createOrganizationService
+  return getMembershipService
 }
