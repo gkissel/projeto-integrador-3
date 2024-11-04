@@ -1,6 +1,6 @@
 import { Role } from '@repo/auth'
 
-import { api } from './api-client'
+import { api } from '../api-client'
 
 interface UpdateMemberRequest {
   org: string

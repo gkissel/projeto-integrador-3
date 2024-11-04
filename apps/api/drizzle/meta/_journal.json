@@ -29,6 +29,13 @@
       "when": 1730335401729,
       "tag": "0003_optimal_firedrake",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1730759648714,
+      "tag": "0004_wide_magneto",
+      "breakpoints": true
     }
   ]
 }

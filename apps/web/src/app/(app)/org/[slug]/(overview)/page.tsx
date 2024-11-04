@@ -1,5 +1,6 @@
 import { EllipsisVerticalIcon } from '@heroicons/react/24/solid'
 import dynamic from 'next/dynamic'
+import { redirect } from 'next/navigation'
 
 import { getCurrentOrg } from '@/auth/auth'
 import { Button } from '@/components/catalyst/button'
@@ -18,6 +19,10 @@ const OverviewSlider = dynamic(() => import('./components/overview-slider'))
 
 export default async function Overview() {
   const currentOrg = await getCurrentOrg()
+
+  if (!currentOrg) {
+    redirect('/')
+  }
 
   return (
     <div className='space-y-8'>

@@ -62,12 +62,12 @@ export class CreateUserService {
     await this.usersRepository.create(user)
 
     const orgSlug =
-      email.split('@')[0] + '.' + email.split('@')[1].split('.')[0]
+      email.split('@')[0] + '-' + email.split('@')[1].split('.')[0]
 
     // console.log(orgSlug)
 
     const organization = Organization.create({
-      name: `Organiazção de ${firstName} ${lastName}`,
+      name: `Organização de ${firstName} ${lastName}`,
       ownerId: user.id,
       slug: Slug.createFromText(orgSlug),
     })

@@ -11,8 +11,8 @@ interface RevokeInviteButtonProps {
 export function RevokeInviteButton({ inviteId }: RevokeInviteButtonProps) {
   return (
     <form action={revokeInviteAction.bind(null, inviteId)}>
-      <Button size="sm" variant="destructive">
-        <XOctagon className="mr-2 size-4" />
+      <Button size='sm' variant='destructive'>
+        <XOctagon className='mr-2 size-4' />
         Revoke invite
       </Button>
     </form>

@@ -1,6 +1,6 @@
 'use client'
 
-import { Role } from '@saas/auth'
+import { Role } from '@repo/auth'
 import { ComponentProps } from 'react'
 
 import {
@@ -27,13 +27,13 @@ export function UpdateMemberRoleSelect({
 
   return (
     <Select onValueChange={updateMemberRole} {...props}>
-      <SelectTrigger className="h-8 w-32">
+      <SelectTrigger className='h-8 w-32'>
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="ADMIN">Admin</SelectItem>
-        <SelectItem value="MEMBER">Member</SelectItem>
-        <SelectItem value="BILLING">Billing</SelectItem>
+        <SelectItem value='ADMIN'>Admin</SelectItem>
+        <SelectItem value='MEMBER'>Member</SelectItem>
+        <SelectItem value='BILLING'>Billing</SelectItem>
       </SelectContent>
     </Select>
   )

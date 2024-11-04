@@ -1,10 +1,13 @@
+'use server'
+
 /* eslint-disable no-shadow */
+
 /* eslint-disable consistent-return */
 import { defineAbilityFor } from '@repo/auth'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-import { getMembership } from '@/http/get-membership'
+import { getMembership } from '@/http/member/get-membership'
 import { getProfile } from '@/http/organization/get-profile'
 
 export async function isAuthenticated() {
