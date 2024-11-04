@@ -10,8 +10,8 @@ import {
   TableCell,
   TableRow,
 } from '@/components/catalyst/table'
-import { getMembers } from '@/http/get-members'
 import { getMembership } from '@/http/get-membership'
+import { getMembers } from '@/http/member/get-members'
 
 import { getUserByIdAction, removeMemberAction } from './actions'
 import { UpdateMemberRoleSelect } from './update-member-role-select'

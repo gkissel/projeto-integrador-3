@@ -7,9 +7,9 @@ import { z } from 'zod'
 
 import { getCurrentOrg } from '@/auth/auth'
 import { createInvite } from '@/http/create-invite'
-import { removeMember } from '@/http/remove-member'
+import { removeMember } from '@/http/member/remove-member'
+import { updateMember } from '@/http/member/update-member'
 import { revokeInvite } from '@/http/revoke-invite'
-import { updateMember } from '@/http/update-member'
 import { getUserById } from '@/http/user/get-user-by-id'
 
 const inviteSchema = z.object({

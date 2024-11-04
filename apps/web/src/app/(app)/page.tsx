@@ -5,7 +5,7 @@ import { auth } from '@/auth/auth'
 export default async function Home() {
   const { user } = await auth()
 
-  const userDefaultOrganization = `${user.email.split('@')[0]}.${user.email.split('@')[1].split('.')[0]}`
+  const userDefaultOrganization = `${user.email.split('@')[0]}-${user.email.split('@')[1].split('.')[0]}`
 
   redirect(`/org/${userDefaultOrganization}`)
 

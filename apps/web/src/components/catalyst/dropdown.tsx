@@ -1,9 +1,8 @@
 'use client'
 
-/* eslint-disable react/no-array-index-key */
-
 import * as Headless from '@headlessui/react'
 import clsx from 'clsx'
+import { useRouter } from 'next/navigation'
 import type React from 'react'
 
 import { Button } from './button'
@@ -55,8 +54,9 @@ export function DropdownMenu({
 
 export function DropdownItem({
   className,
+  isReload = false,
   ...props
-}: { className?: string } & (
+}: { className?: string; isReload?: boolean } & (
   | Omit<React.ComponentPropsWithoutRef<'button'>, 'as' | 'className'>
   | Omit<React.ComponentPropsWithoutRef<typeof Link>, 'className'>
 )) {
@@ -80,6 +80,28 @@ export function DropdownItem({
     // Avatar
     '[&>[data-slot=avatar]]:-ml-1 [&>[data-slot=avatar]]:mr-2.5 [&>[data-slot=avatar]]:size-6 sm:[&>[data-slot=avatar]]:mr-2 sm:[&>[data-slot=avatar]]:size-5',
   )
+
+  if (isReload) {
+    const router = useRouter()
+
+    return (
+      <Headless.MenuItem>
+        {'href' in props ? (
+          <Link
+            {...props}
+            className={classes}
+            prefetch
+            onClick={() => {
+              console.log('refreshing')
+              router.refresh()
+            }}
+          />
+        ) : (
+          <button type='button' {...props} className={classes} />
+        )}
+      </Headless.MenuItem>
+    )
+  }
 
   return (
     <Headless.MenuItem>
