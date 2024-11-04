@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "start": "tsx src/server.ts",
     "dev": "tsx --watch src/server.ts",
     "migrate": "tsx src/infra/database/postgres/migrate.service.ts",
     "test": "vitest run",
