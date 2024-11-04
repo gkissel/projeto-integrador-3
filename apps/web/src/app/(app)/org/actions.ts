@@ -6,7 +6,7 @@ import { z } from 'zod'
 
 import { getCurrentOrg } from '@/auth/auth'
 import { createOrganization } from '@/http/organization/create-organization'
-import { updateOrganization } from '@/http/update-organization'
+import { updateOrganization } from '@/http/organization/update-organization'
 
 const organizationSchema = z.object({
   name: z
