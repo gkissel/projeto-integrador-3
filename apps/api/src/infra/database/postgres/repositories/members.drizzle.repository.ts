@@ -13,7 +13,7 @@ export type DrizzleMember = {
   createdAt: Date | null
   updatedAt: Date | null
   orgId: string
-  role: 'ADMIN' | 'MEMBER'
+  role: 'ADMIN' | 'MEMBER' | 'OWNER'
   userId: string
 }
 

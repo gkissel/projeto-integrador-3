@@ -1,6 +1,13 @@
 import 'fastify'
 
-import { DrizzleMember } from '@/infra/database/postgres/repositories/members.drizzle.repository'
+type DrizzleMember = {
+  id: string
+  createdAt: Date | null
+  updatedAt: Date | null
+  orgId: string
+  role: 'ADMIN' | 'MEMBER' | 'OWNER'
+  userId: string
+}
 
 declare module 'fastify' {
   export interface FastifyRequest {

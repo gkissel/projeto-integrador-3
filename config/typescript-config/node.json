@@ -4,9 +4,9 @@
   "_version": "20.1.0",
 
   "compilerOptions": {
-    "lib": ["ESNext"],
-    "module": "ESNext",
-    "target": "ESNext",
+    "lib": ["ES2023"],
+    "module": "ES2022",
+    "target": "ES2023",
     "noEmit": true,
     "strict": true,
     "esModuleInterop": true,
