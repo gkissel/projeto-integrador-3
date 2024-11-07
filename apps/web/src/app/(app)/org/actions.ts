@@ -3,11 +3,9 @@
 import { HTTPError } from 'ky'
 import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
-
 import { getCurrentOrg } from '@/auth/auth'
 import { createOrganization } from '@/http/organization/create-organization'
 import { updateOrganization } from '@/http/organization/update-organization'
-
 const organizationSchema = z.object({
   name: z
     .string()
@@ -91,7 +89,6 @@ export async function updateOrganizationAction(data: FormData) {
       errors: null,
     }
   }
-
   return {
     success: true,
     message: 'Salvou a organização com sucesso.',

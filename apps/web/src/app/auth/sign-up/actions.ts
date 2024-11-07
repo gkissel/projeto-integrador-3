@@ -2,7 +2,6 @@
 
 import { HTTPError } from 'ky'
 import { z } from 'zod'
-
 import { signUp } from '@/http/user/create-user'
 
 const signUpSchema = z.object({

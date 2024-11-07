@@ -88,7 +88,7 @@ export default function UpdateAccountForm({
 
                 {errors?.firstName && (
                   <ErrorMessage className='text-xs font-medium text-red-500 dark:text-red-400'>
-                    {errors.firstName[0]}
+                    {errors.lastName[0]}
                   </ErrorMessage>
                 )}
               </Field>
