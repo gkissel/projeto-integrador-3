@@ -15,7 +15,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/app/api/forgot-password/testEmail.js"  ],
   "exclude": [
     "node_modules"
   ]

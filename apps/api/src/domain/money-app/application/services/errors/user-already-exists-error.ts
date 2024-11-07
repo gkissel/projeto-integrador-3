@@ -4,6 +4,6 @@ type uniqueUsersFields = 'email' | 'username'
 
 export class UserAlreadyExistsError extends Error implements ServiceError {
   constructor(identifier: uniqueUsersFields, value: string) {
-    super(`User with ${identifier}: "${value}" already exists.`)
+    super(`Usuário ${identifier}: "${value}" já existe.`)
   }
 }
