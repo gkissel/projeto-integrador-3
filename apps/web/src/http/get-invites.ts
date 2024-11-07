@@ -16,7 +16,6 @@ interface GetInvitesResponse {
 }
 
 export async function getInvites(org: string) {
-  console.log(org)
   const result = await api
     .get(`organizations/${org}/invites`, {
       next: {
