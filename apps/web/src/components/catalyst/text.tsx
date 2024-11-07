@@ -20,6 +20,7 @@ export function Text({
 
 export function TextLink({
   className,
+
   ...props
 }: React.ComponentPropsWithoutRef<typeof Link>) {
   return (

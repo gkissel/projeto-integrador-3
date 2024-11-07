@@ -1,3 +1,5 @@
+'use server'
+
 import { CookiesFn } from 'cookies-next/lib/types'
 import ky from 'ky'
 

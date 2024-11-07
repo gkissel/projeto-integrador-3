@@ -2,10 +2,14 @@ import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 
+export type TransactionType = 'INCOME' | 'OUTCOME'
+
 export interface TransactionProps {
   description: string
 
   value: number
+
+  type: TransactionType
 
   accountId: UniqueEntityID
   orgId: UniqueEntityID
@@ -25,6 +29,10 @@ export class Transaction extends Entity<TransactionProps> {
 
   get description() {
     return this.props.description
+  }
+
+  get type() {
+    return this.props.type
   }
 
   get value() {
