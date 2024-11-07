@@ -2,9 +2,9 @@
 
 import { AlertTriangle, Loader2, UserPlus } from 'lucide-react'
 
+import { Button } from '@/components/catalyst/button'
+import { Input } from '@/components/catalyst/input'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
@@ -55,7 +55,6 @@ export function CreateInviteForm() {
           <SelectContent>
             <SelectItem value='ADMIN'>Admin</SelectItem>
             <SelectItem value='MEMBER'>Member</SelectItem>
-            <SelectItem value='BILLING'>Billing</SelectItem>
           </SelectContent>
         </Select>
 

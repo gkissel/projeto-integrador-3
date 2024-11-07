@@ -32,6 +32,10 @@ export class Invite extends Entity<InviteProps> {
     return this.props.createdAt
   }
 
+  get email() {
+    return this.props.email
+  }
+
   get updatedAt() {
     return this.props.updatedAt
   }

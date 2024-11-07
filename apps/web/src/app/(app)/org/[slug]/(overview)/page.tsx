@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { redirect } from 'next/navigation'
 
 import { getCurrentOrg } from '@/auth/auth'
-import { Button } from '@/components/catalyst/button'
+import Button from '@/components/catalyst/button'
 import { Divider } from '@/components/catalyst/divider'
 import {
   Table,

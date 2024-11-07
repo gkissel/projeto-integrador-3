@@ -14,10 +14,12 @@ interface InterceptedSheetContentProps
   extends React.ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {}
 
-export const InterceptedSheetContent = React.forwardRef<
-  React.ElementRef<typeof SheetPrimitive.Content>,
-  InterceptedSheetContentProps
->(({ side = 'right', className, children, ...props }, ref) => {
+export const InterceptedSheetContent = ({
+  side = 'right',
+  className,
+  children,
+  ...props
+}: InterceptedSheetContentProps) => {
   const router = useRouter()
 
   function onDismiss() {
@@ -28,7 +30,6 @@ export const InterceptedSheetContent = React.forwardRef<
     <SheetPortal>
       <SheetOverlay />
       <SheetPrimitive.Content
-        ref={ref}
         onEscapeKeyDown={onDismiss}
         onPointerDownOutside={onDismiss}
         className={cn(sheetVariants({ side }), className)}
@@ -45,5 +46,5 @@ export const InterceptedSheetContent = React.forwardRef<
       </SheetPrimitive.Content>
     </SheetPortal>
   )
-})
+}
 InterceptedSheetContent.displayName = SheetPrimitive.Content.displayName
