@@ -2,15 +2,14 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { CheckCircle, LogIn, LogOut } from 'lucide-react'
 import { cookies } from 'next/headers'
-import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 import { auth, isAuthenticated } from '@/auth/auth'
+import { Button } from '@/components/catalyst/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
-import { acceptInvite } from '@/http/accept-invite'
 import { getInvite } from '@/http/get-invite'
+import { acceptInvite } from '@/http/invite/accept-invite'
 
 dayjs.extend(relativeTime)
 
@@ -80,7 +79,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
 
         {!isUserAuthenticated && (
           <form action={signInFromInvite}>
-            <Button type='submit' variant='secondary' className='w-full'>
+            <Button type='submit' color='cyan' className='w-full'>
               <LogIn className='mr-2 size-4' />
               Faça login para aceitar o convite
             </Button>
@@ -89,7 +88,7 @@ export default async function InvitePage({ params }: InvitePageProps) {
 
         {userIsAuthenticatedWithSameEmailFromInvite && (
           <form action={acceptInviteAction}>
-            <Button type='submit' variant='secondary' className='w-full'>
+            <Button type='submit' color='emerald' className='w-full'>
               <CheckCircle className='mr-2 size-4' />
               Juntar-se {invite.organization.name}
             </Button>
@@ -112,15 +111,17 @@ export default async function InvitePage({ params }: InvitePageProps) {
               </p>
 
               <div className='space-y-2'>
-                <Button className='w-full' variant='secondary' asChild>
-                  <a href='/api/auth/sign-out'>
-                    <LogOut className='mr-2 size-4' />
-                    Sair de {currentUserEmail}
-                  </a>
+                <Button
+                  className='w-full'
+                  color='fuchsia'
+                  href={'/api/auth/sign-out'}
+                >
+                  <LogOut className='mr-2 size-4' />
+                  Sair de {currentUserEmail}
                 </Button>
 
-                <Button className='w-full' variant='outline' asChild>
-                  <Link href='/'>Voltar ao painel</Link>
+                <Button className='w-full' color='indigo' href={'/'}>
+                  <span>Voltar ao painel</span>
                 </Button>
               </div>
             </div>

@@ -17,7 +17,9 @@ export const errorHandler: FastifyErrorHandler = (error, request, reply) => {
       errors: error.flatten().fieldErrors,
     })
   }
-  console.error(chalk.red(error.message))
+  console.log(error)
+
+  console.error(chalk.redBright(error.message))
 
   // if (error instanceof BadRequestError) {
   //   reply.status(400).send({

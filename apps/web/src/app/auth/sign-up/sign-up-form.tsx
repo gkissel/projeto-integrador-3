@@ -111,8 +111,29 @@ export default function SignUpForm() {
                   id='telephone'
                   type='tel'
                   placeholder='(13) 94569-7890'
-                  minLength={11}
-                  maxLength={11}
+                  minLength={15}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/\D/g, '')
+                    let formattedValue = value
+                    if (value.length >= 11) {
+                      formattedValue = value.replace(
+                        /(\d{2})(\d{5})(\d{4})/,
+                        '($1) $2-$3',
+                      )
+                    } else if (value.length >= 7) {
+                      formattedValue = value.replace(
+                        /(\d{2})(\d{4,5})(\d{0,4})/,
+                        '($1) $2-$3',
+                      )
+                    } else if (value.length >= 2) {
+                      formattedValue = value.replace(
+                        /(\d{2})(\d{0,5})/,
+                        '($1) $2',
+                      )
+                    }
+                    e.target.value = formattedValue
+                  }}
+                  maxLength={15}
                 />
 
                 {errors?.telephone && (
