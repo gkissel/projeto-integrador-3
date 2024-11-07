@@ -41,7 +41,7 @@ export async function authenticateWithPassword(app: FastifyInstance) {
         },
         {
           sign: {
-            expiresIn: '7d',
+            expiresIn: '8d',
           },
         },
       )

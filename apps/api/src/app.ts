@@ -11,6 +11,7 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { env } from './infra/env'
+import { getInvitesByOrganization } from './infra/http/controllers/invite/get-invites-by-organization.controller'
 import { createOrganization } from './infra/http/controllers/organization/create-organization.controller'
 import { getMembers } from './infra/http/controllers/organization/get-members.controller'
 import { getMembership } from './infra/http/controllers/organization/get-membership.controller'
@@ -70,3 +71,4 @@ app.register(createOrganization)
 app.register(getOrganizationByUser)
 app.register(getMembers)
 app.register(getMembership)
+app.register(getInvitesByOrganization)

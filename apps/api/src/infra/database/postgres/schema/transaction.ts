@@ -1,9 +1,20 @@
 import { randomUUID } from 'crypto'
 import { relations } from 'drizzle-orm'
-import { doublePrecision, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
+import {
+  doublePrecision,
+  pgEnum,
+  pgTable,
+  text,
+  timestamp,
+} from 'drizzle-orm/pg-core'
 
 import { account } from './account'
 import { organizations } from './organization'
+
+export const transactionTypes = pgEnum('transaction_types', [
+  'INCOME',
+  'OUTCOME',
+])
 
 export const transactions = pgTable('transactions', {
   id: text('id')
@@ -13,6 +24,8 @@ export const transactions = pgTable('transactions', {
   description: text('description').notNull(),
 
   value: doublePrecision('value').notNull(),
+
+  type: transactionTypes('type').notNull(),
 
   accountId: text('account_id')
     .references(() => account.id, {

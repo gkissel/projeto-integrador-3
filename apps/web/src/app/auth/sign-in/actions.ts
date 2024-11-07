@@ -4,7 +4,7 @@ import { HTTPError } from 'ky'
 import { cookies } from 'next/headers'
 import { z } from 'zod'
 
-import { acceptInvite } from '@/http/accept-invite'
+import { acceptInvite } from '@/http/invite/accept-invite'
 import { signIn } from '@/http/user/sign-in'
 
 const signInSchema = z.object({

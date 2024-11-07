@@ -1,3 +1,4 @@
+import { Invites } from './invites'
 import { MemberList } from './member-list'
 
 export default async function MembersPage() {
@@ -6,7 +7,7 @@ export default async function MembersPage() {
       <h1 className='text-2xl font-bold'>Members</h1>
 
       <div className='space-y-4'>
-        {/* <Invites /> */}
+        <Invites />
         <MemberList />
       </div>
     </div>

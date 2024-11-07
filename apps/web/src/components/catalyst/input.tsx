@@ -1,6 +1,6 @@
 import * as Headless from '@headlessui/react'
 import clsx from 'clsx'
-import React, { forwardRef } from 'react'
+import React from 'react' // Removed forwardRef import
 
 export function InputGroup({
   children,
@@ -24,24 +24,21 @@ export function InputGroup({
 const dateTypes = ['date', 'datetime-local', 'month', 'time', 'week']
 type DateType = (typeof dateTypes)[number]
 
-export const Input = forwardRef(function Input(
-  {
-    className,
-    ...props
-  }: {
-    className?: string
-    type?:
-      | 'email'
-      | 'number'
-      | 'password'
-      | 'search'
-      | 'tel'
-      | 'text'
-      | 'url'
-      | DateType
-  } & Omit<Headless.InputProps, 'as' | 'className'>,
-  ref: React.ForwardedRef<HTMLInputElement>,
-) {
+export function Input({
+  className,
+  ...props
+}: {
+  className?: string
+  type?:
+    | 'email'
+    | 'number'
+    | 'password'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'url'
+    | DateType
+} & Omit<Headless.InputProps, 'as' | 'className'>) {
   return (
     <span
       data-slot='control'
@@ -62,7 +59,6 @@ export const Input = forwardRef(function Input(
       ])}
     >
       <Headless.Input
-        ref={ref}
         {...props}
         className={clsx([
           // Date classes
@@ -101,4 +97,4 @@ export const Input = forwardRef(function Input(
       />
     </span>
   )
-})
+}

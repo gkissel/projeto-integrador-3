@@ -10,9 +10,12 @@ const signUpSchema = z.object({
   lastName: z.string().min(1, { message: 'Sobrenome inválido.' }),
   telephone: z
     .string()
-    .refine((val) => val.length === 11 && /^\d+$/.test(val), {
-      message: 'Número de telefone inválido.',
-    }),
+    .refine(
+      (val) => val.length === 15 && /^\(\d{2}\)\s\d{5}-\d{4}$/.test(val),
+      {
+        message: 'Número de telefone inválido.',
+      },
+    ),
   birthdate: z.string().refine(
     (val) => {
       const date = new Date(val)

@@ -1,7 +1,13 @@
 import { ability, getCurrentOrg } from '@/auth/auth'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from '@/components/catalyst/table'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { getInvites } from '@/http/get-invites'
+import { getMembership } from '@/http/member/get-membership'
 
 import { CreateInviteForm } from './create-invite-form'
 import { RevokeInviteButton } from './revoke-invite-button'
@@ -10,11 +16,12 @@ export async function Invites() {
   const currentOrg = await getCurrentOrg()
   const permissions = await ability()
 
+  const { membership } = await getMembership(currentOrg!)
   const { invites } = await getInvites(currentOrg!)
 
   return (
     <div className='space-y-4'>
-      {permissions?.can('create', 'Invite') && (
+      {membership.role !== 'MEMBER' && (
         <Card>
           <CardHeader>
             <CardTitle>Invite member</CardTitle>

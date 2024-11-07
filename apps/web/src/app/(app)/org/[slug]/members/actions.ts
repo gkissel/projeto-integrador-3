@@ -6,10 +6,10 @@ import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 
 import { getCurrentOrg } from '@/auth/auth'
-import { createInvite } from '@/http/create-invite'
+import { createInvite } from '@/http/invite/create-invite'
+import { revokeInvite } from '@/http/invite/revoke-invite'
 import { removeMember } from '@/http/member/remove-member'
 import { updateMember } from '@/http/member/update-member'
-import { revokeInvite } from '@/http/revoke-invite'
 import { getUserById } from '@/http/user/get-user-by-id'
 
 const inviteSchema = z.object({
