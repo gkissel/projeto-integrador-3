@@ -11,7 +11,12 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { env } from './infra/env'
+import { acceptInvite } from './infra/http/controllers/invite/accept-invite.controller'
+import { createInvite } from './infra/http/controllers/invite/create-invite.controller'
+import { denyInvite } from './infra/http/controllers/invite/deny-invite.controller'
 import { getInvitesByOrganization } from './infra/http/controllers/invite/get-invites-by-organization.controller'
+import { getInvitesByUser } from './infra/http/controllers/invite/get-invites-by-user.controller'
+import { revokeInvite } from './infra/http/controllers/invite/revoke-invite.controller'
 import { createOrganization } from './infra/http/controllers/organization/create-organization.controller'
 import { getMembers } from './infra/http/controllers/organization/get-members.controller'
 import { getMembership } from './infra/http/controllers/organization/get-membership.controller'
@@ -61,14 +66,27 @@ app.register(fastifyJwt, {
 
 app.register(fastifyCors)
 
+// User
 app.register(createAccount)
 app.register(authenticateWithPassword)
+
+// Profile
 app.register(getProfile)
 app.register(getUserByID)
 app.register(updateProfile)
 app.register(deleteProfile)
+
+// Organization
 app.register(createOrganization)
 app.register(getOrganizationByUser)
+// Member
 app.register(getMembers)
 app.register(getMembership)
+
+// Invites
 app.register(getInvitesByOrganization)
+app.register(getInvitesByUser)
+app.register(createInvite)
+app.register(revokeInvite)
+app.register(denyInvite)
+app.register(acceptInvite)
