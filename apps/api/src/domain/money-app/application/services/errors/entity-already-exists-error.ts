@@ -4,6 +4,6 @@ type entityLists = 'member'
 
 export class EntityAlreadyExistsError extends Error implements ServiceError {
   constructor(identifier: entityLists) {
-    super(`Entity ${identifier} already exists.`)
+    super(`Entidade ${identifier} já existe.`)
   }
 }
