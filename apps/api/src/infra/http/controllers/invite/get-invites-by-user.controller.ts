@@ -2,23 +2,20 @@ import type { FastifyInstance } from 'fastify'
 import type { ZodTypeProvider } from 'fastify-type-provider-zod'
 import { z } from 'zod'
 
-import { makeGetInvitesByOrganizationService } from '../../factories/invite/get-invites-by-organization.factory'
+import { makeGetInvitesByUserService } from '../../factories/invite/get-invites-by-user.factory'
 import { auth } from '../../middlewares/auth'
 
-export async function getInvitesByOrganization(app: FastifyInstance) {
+export async function getInvitesByUser(app: FastifyInstance) {
   app
     .withTypeProvider<ZodTypeProvider>()
     .register(auth)
     .get(
-      '/organizations/:slug/invites',
+      '/users/invites',
       {
         schema: {
           tags: ['Invites'],
-          summary: 'Get invites on organization',
+          summary: 'Get invites for current user',
           security: [{ bearerAuth: [] }],
-          params: z.object({
-            slug: z.string(),
-          }),
           response: {
             200: z.object({
               invites: z.array(
@@ -39,24 +36,19 @@ export async function getInvitesByOrganization(app: FastifyInstance) {
         },
       },
       async (request) => {
-        const { slug } = request.params
+        const userId = await request.getCurrentUserId()
 
-        const { organization } = await request.getUserMembership(slug)
+        const getInvitesByUserService = makeGetInvitesByUserService()
 
-        const getOrganizationInvitesService =
-          makeGetInvitesByOrganizationService()
-
-        const response = await getOrganizationInvitesService.execute({
-          orgId: organization.id.toString(),
+        const response = await getInvitesByUserService.execute({
+          userId,
         })
 
         if (response.isLeft()) {
           const error = response.value
-
           throw error
         }
 
-        // console.log(response.value)
         const { invites } = response.value
 
         return {
