@@ -55,6 +55,14 @@ export class CreateInviteService {
       return left(new ResourceNotFoundError())
     }
 
+    const inviteExists = (await this.invitesRepository.getByEmail(email)).find(
+      (invite) => invite.orgId.toString() === organizationId,
+    )
+
+    if (inviteExists) {
+      return left(new EntityAlreadyExistsError('invite'))
+    }
+
     const invite = Invite.create({
       orgId: new UniqueEntityID(organizationId),
       email,
