@@ -7,6 +7,6 @@ export class OrganizationAlreadyExistsError
   implements ServiceError
 {
   constructor(identifier: uniqueOrganizationFields, value: string) {
-    super(`Organization with ${identifier}: "${value}" already exists.`)
+    super(`Organização ${identifier}: "${value}" já existe.`)
   }
 }

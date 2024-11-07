@@ -8,10 +8,13 @@ import { deleteProfile } from '@/http/user/delete-user'
 import { updateProfile } from '@/http/user/update-user'
 
 const signUpSchema = z.object({
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-
-  telephone: z.string().optional(),
+  firstName: z.string().min(1, { message: 'Nome inválido.' }),
+  lastName: z.string().min(1, { message: 'Sobrenome inválido.' }),
+  telephone: z
+    .string()
+    .refine((val) => val.length === 11 && /^\d+$/.test(val), {
+      message: 'Número de telefone inválido.',
+    }),
 })
 
 export async function updateProfileAction(data: FormData) {
