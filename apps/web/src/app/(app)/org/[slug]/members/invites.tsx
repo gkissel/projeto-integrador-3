@@ -23,7 +23,7 @@ export async function Invites() {
       {membership.role !== 'MEMBER' && (
         <Card>
           <CardHeader>
-            <CardTitle>Invite member</CardTitle>
+            <CardTitle>Convidar membro</CardTitle>
           </CardHeader>
           <CardContent>
             <CreateInviteForm />
@@ -32,7 +32,7 @@ export async function Invites() {
       )}
 
       <div className='space-y-2'>
-        <h2 className='text-lg font-semibold'>Invites</h2>
+        <h2 className='text-lg font-semibold'>Convites</h2>
 
         <div className='rounded border'>
           <Table>
@@ -62,7 +62,7 @@ export async function Invites() {
               {invites.length === 0 && (
                 <TableRow>
                   <TableCell className='text-center text-muted-foreground'>
-                    No invites found
+                    Nenhum convite encontrado
                   </TableCell>
                 </TableRow>
               )}
