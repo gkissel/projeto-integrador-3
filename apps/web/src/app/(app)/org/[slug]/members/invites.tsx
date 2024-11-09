@@ -1,4 +1,4 @@
-import { ability, getCurrentOrg } from '@/auth/auth'
+import { getCurrentOrg } from '@/auth/auth'
 import {
   Table,
   TableBody,
@@ -14,7 +14,6 @@ import { RevokeInviteButton } from './revoke-invite-button'
 
 export async function Invites() {
   const currentOrg = await getCurrentOrg()
-  const permissions = await ability()
 
   const { membership } = await getMembership(currentOrg!)
   const { invites } = await getInvites(currentOrg!)
@@ -51,7 +50,7 @@ export async function Invites() {
                     </TableCell>
                     <TableCell className='py-2.5'>
                       <div className='flex justify-end'>
-                        {permissions?.can('delete', 'Invite') && (
+                        {membership.role !== 'MEMBER' && (
                           <RevokeInviteButton inviteId={invite.id} />
                         )}
                       </div>
