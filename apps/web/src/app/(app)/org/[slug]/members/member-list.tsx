@@ -29,7 +29,7 @@ export async function MemberList() {
 
   return (
     <div className='space-y-2'>
-      <h2 className='text-lg font-semibold'>Members</h2>
+      <h2 className='text-lg font-semibold'>Membros</h2>
 
       <div className='rounded border'>
         <Table>
@@ -75,7 +75,7 @@ export async function MemberList() {
                       {role === 'OWNER' && (
                         <Button color='violet'>
                           <ArrowLeftRight className='mr-2 size-4' />
-                          Transfer ownership
+                          Transferir cargo
                         </Button>
                       )}
 
@@ -100,7 +100,7 @@ export async function MemberList() {
                             color='red'
                           >
                             <UserMinus className='mr-2 size-4' />
-                            Remove
+                            Remover
                           </Button>
                         </form>
                       )}

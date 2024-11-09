@@ -1,10 +1,13 @@
 import {
   ChevronUpIcon,
+  CurrencyDollarIcon,
+  DocumentCurrencyDollarIcon,
+  EnvelopeIcon,
   UserCircleIcon,
   UserGroupIcon,
 } from '@heroicons/react/16/solid'
 import { HomeIcon } from '@heroicons/react/20/solid'
-import { BadgeDollarSign, LogOut } from 'lucide-react'
+import { BadgeDollarSign, LogOut, Mail } from 'lucide-react'
 
 import { auth, getCurrentOrg } from '@/auth/auth'
 import { Avatar } from '@/components/catalyst/avatar'
@@ -57,6 +60,13 @@ function AccountDropdownMenu({
       <DropdownItem href='/account'>
         <UserCircleIcon />
         <DropdownLabel>Minha conta</DropdownLabel>
+      </DropdownItem>
+
+      <DropdownDivider />
+
+      <DropdownItem href='/invites'>
+        <EnvelopeIcon />
+        <DropdownLabel>Convites</DropdownLabel>
       </DropdownItem>
 
       <DropdownDivider />
@@ -143,13 +153,17 @@ export async function ApplicationLayout({
               </NavItem>
 
               <NavItem href={`/org/${currentOrg}/accounts`}>
-                <BadgeDollarSign />
+                <CurrencyDollarIcon />
                 <SidebarLabel>Contas</SidebarLabel>
               </NavItem>
 
               <NavItem href={`/org/${currentOrg}/members`}>
                 <UserGroupIcon />
                 <SidebarLabel>Membros</SidebarLabel>
+              </NavItem>
+              <NavItem href={`/org/${currentOrg}/transfers`}>
+                <DocumentCurrencyDollarIcon />
+                <SidebarLabel>Trasferências</SidebarLabel>
               </NavItem>
               {/* <NavItem href='/events'>
                 <Square2StackIcon />

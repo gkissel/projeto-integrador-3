@@ -88,6 +88,12 @@ export default function SignInForm() {
           >
             Esqueceu sua senha?
           </Link>
+          <Link
+            href='/auth/new-password'
+            className='ml-44 text-xs font-medium text-foreground hover:underline'
+          >
+            Alterar Senha
+          </Link>
 
           <Button className='w-full' type='submit' disabled={isPending}>
             {isPending ? <Loader2 className='size-4 animate-spin' /> : 'Entrar'}

@@ -1,5 +1,4 @@
 'use server'
-
 import { HTTPError } from 'ky'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
@@ -12,9 +11,27 @@ const signUpSchema = z.object({
   lastName: z.string().min(1, { message: 'Sobrenome inválido.' }),
   telephone: z
     .string()
-    .refine((val) => val.length === 11 && /^\d+$/.test(val), {
-      message: 'Número de telefone inválido.',
-    }),
+    .refine(
+      (val) => val.length === 15 && /^\(\d{2}\)\s\d{5}-\d{4}$/.test(val),
+      {
+        message: 'Número de telefone inválido.',
+      },
+    ),
+})
+const TransferSchema = z.object({
+  destination: z.string().min(1, { message: 'Destino inválido.' }),
+  date: z.string().refine(
+    (val) => {
+      const date = new Date(val)
+      return !isNaN(date.getTime())
+    },
+    { message: 'Data inválida.' },
+  ),
+  amount: z
+    .number({ invalid_type_error: 'Valor deve ser numérico.' })
+    .positive({ message: 'O valor deve ser positivo.' })
+    .refine((val) => val > 0, { message: 'O valor deve ser maior que zero.' }),
+  account: z.string().min(1, { message: 'Conta inválida.' }),
 })
 
 export async function updateProfileAction(data: FormData) {
