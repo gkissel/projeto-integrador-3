@@ -13,7 +13,7 @@ import { updateMember } from '@/http/member/update-member'
 import { getUserById } from '@/http/user/get-user-by-id'
 
 const inviteSchema = z.object({
-  email: z.string().email({ message: 'Invalid e-mail address.' }),
+  email: z.string().email({ message: 'Endereço de e-mail inválido.' }),
   role: roleSchema,
 })
 
@@ -48,14 +48,14 @@ export async function createInviteAction(data: FormData) {
 
     return {
       success: false,
-      message: 'Unexpected error, try again in a few minutes.',
+      message: 'Erro inesperado. Tente novamente em alguns minutos.',
       errors: null,
     }
   }
 
   return {
     success: true,
-    message: 'Successfully created the invite.',
+    message: 'O convite foi enviado com sucesso.',
     errors: null,
   }
 }

@@ -25,7 +25,7 @@ export function CreateInviteForm() {
       {success === false && message && (
         <Alert variant='destructive'>
           <AlertTriangle className='size-4' />
-          <AlertTitle>Invite failed!</AlertTitle>
+          <AlertTitle>Falha no convite!</AlertTitle>
           <AlertDescription>
             <p>{message}</p>
           </AlertDescription>
@@ -38,7 +38,7 @@ export function CreateInviteForm() {
             name='email'
             id='email'
             type='email'
-            placeholder='john@example.com'
+            placeholder='mateus@example.com'
           />
 
           {errors?.email && (
@@ -54,7 +54,7 @@ export function CreateInviteForm() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value='ADMIN'>Admin</SelectItem>
-            <SelectItem value='MEMBER'>Member</SelectItem>
+            <SelectItem value='MEMBER'>Membro</SelectItem>
           </SelectContent>
         </Select>
 
@@ -64,7 +64,7 @@ export function CreateInviteForm() {
           ) : (
             <>
               <UserPlus className='mr-2 size-4' />
-              Invite user
+              Convidar usuário
             </>
           )}
         </Button>

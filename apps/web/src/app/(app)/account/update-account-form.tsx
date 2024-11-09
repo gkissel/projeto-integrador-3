@@ -1,8 +1,8 @@
 'use client'
-
 import { AlertTriangle, Loader2 } from 'lucide-react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
 import { Button } from '@/components/catalyst/button'
 import { Divider } from '@/components/catalyst/divider'
@@ -43,6 +43,7 @@ export default function UpdateAccountForm({
   )
 
   const formRef = useRef<HTMLFormElement>(null)
+  const [isPasswordEntered, setIsPasswordEntered] = useState(false)
   return (
     <form onSubmit={handleSubmit} className='space-y-4' ref={formRef}>
       <Fieldset className='space-y-4'>
@@ -192,7 +193,12 @@ export default function UpdateAccountForm({
         <Divider className='my-10' />
 
         <div className='flex flex-col items-center gap-4 pt-4 lg:flex-row lg:justify-between'>
-          <DeleteAccountButton />
+          <div className='flex w-full flex-col gap-4 lg:w-fit lg:flex-row'>
+            <DeleteAccountButton />
+            <Link href='/account/change-password'>
+              <Button className='w-full lg:w-fit'>Mudar Senha</Button>
+            </Link>
+          </div>
           <div className='flex w-full flex-col justify-end gap-4 lg:w-fit lg:flex-row'>
             <Button
               type='reset'
