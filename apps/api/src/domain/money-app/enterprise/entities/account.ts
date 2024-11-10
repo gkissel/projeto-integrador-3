@@ -5,10 +5,9 @@ import { Optional } from '@/core/types/optional'
 export interface AccountProps {
   name: string
 
-  imageUrl: string
+  imageBlob: Buffer | null
 
-  maxValue: number
-  actualValue: number
+  value: number
 
   orgId: UniqueEntityID
 
@@ -25,28 +24,12 @@ export class Account extends Entity<AccountProps> {
     return this.props.name
   }
 
-  get imageUrl() {
-    return this.props.imageUrl
+  get imageBlob() {
+    return this.props.imageBlob
   }
 
-  get maxValue() {
-    return this.props.maxValue
-  }
-
-  get actualValue() {
-    return this.props.actualValue
-  }
-
-  set actualValue(actualValue: number) {
-    this.props.actualValue = actualValue
-
-    this.touch()
-  }
-
-  set maxValue(maxValue: number) {
-    this.props.maxValue = maxValue
-
-    this.touch()
+  get value() {
+    return this.props.value
   }
 
   get createdAt() {
@@ -57,18 +40,29 @@ export class Account extends Entity<AccountProps> {
     return this.props.updatedAt
   }
 
+  public updateImage(imageBlob: Buffer) {
+    this.props.imageBlob = imageBlob
+    this.touch()
+  }
+
+  public transaction(value: number) {
+    this.props.value += value
+    this.touch()
+  }
+
   private touch() {
     this.props.updatedAt = new Date()
   }
 
   static create(
-    props: Optional<AccountProps, 'createdAt'>,
+    props: Optional<AccountProps, 'createdAt' | 'imageBlob'>,
     id?: UniqueEntityID,
   ) {
     const organization = new Account(
       {
         ...props,
         createdAt: props.createdAt ?? new Date(),
+        imageBlob: props.imageBlob ?? null,
       },
       id,
     )

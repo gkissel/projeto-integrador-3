@@ -6,11 +6,17 @@ import {
   TableRow,
 } from '@/components/catalyst/table'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { getInvites } from '@/http/get-invites'
+import { getInvites } from '@/http/invite/get-invites'
 import { getMembership } from '@/http/member/get-membership'
 
 import { CreateInviteForm } from './create-invite-form'
 import { RevokeInviteButton } from './revoke-invite-button'
+
+const Role = {
+  OWNER: 'Dono',
+  ADMIN: 'Administrador',
+  MEMBER: 'Membro',
+} as const
 
 export async function Invites() {
   const currentOrg = await getCurrentOrg()
@@ -46,7 +52,7 @@ export async function Invites() {
                       </span>
                     </TableCell>
                     <TableCell className='py-2.5 font-medium'>
-                      {invite.role}
+                      {Role[invite.role]}
                     </TableCell>
                     <TableCell className='py-2.5'>
                       <div className='flex justify-end'>

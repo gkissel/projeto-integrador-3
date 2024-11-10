@@ -7,7 +7,7 @@ import {
   UserGroupIcon,
 } from '@heroicons/react/16/solid'
 import { HomeIcon } from '@heroicons/react/20/solid'
-import { BadgeDollarSign, LogOut, Mail } from 'lucide-react'
+import { LogOut } from 'lucide-react'
 
 import { auth, getCurrentOrg } from '@/auth/auth'
 import { Avatar } from '@/components/catalyst/avatar'
@@ -38,6 +38,7 @@ import {
 import { SidebarLayout } from '@/components/catalyst/sidebar-layout'
 import { OrganizationSwitcher } from '@/components/organization-switcher'
 
+import { getPendingInvitesAction } from '../invites/action'
 import NavItem from './nav-item'
 
 export function getInitials(name: string): string {
@@ -50,11 +51,13 @@ export function getInitials(name: string): string {
   return initials
 }
 
-function AccountDropdownMenu({
+async function AccountDropdownMenu({
   anchor,
 }: {
   anchor: 'top start' | 'bottom end'
 }) {
+  const pendingInvites = await getPendingInvitesAction()
+
   return (
     <DropdownMenu className='min-w-64' anchor={anchor}>
       <DropdownItem href='/account'>
@@ -67,6 +70,16 @@ function AccountDropdownMenu({
       <DropdownItem href='/invites'>
         <EnvelopeIcon />
         <DropdownLabel>Convites</DropdownLabel>
+        {pendingInvites.length > 0 && (
+          <div className='ml-auto flex h-4 w-4 items-center justify-center rounded-full bg-rose-500'>
+            <span className='sr-only'>
+              Você tem {pendingInvites.length} convites pendentes
+            </span>
+            <span className='text-center text-xs font-light'>
+              {pendingInvites.length}
+            </span>
+          </div>
+        )}
       </DropdownItem>
 
       <DropdownDivider />
@@ -87,6 +100,7 @@ export async function ApplicationLayout({
   const { user } = await auth()
 
   const currentOrg = await getCurrentOrg()
+
   return (
     <SidebarLayout
       navbar={

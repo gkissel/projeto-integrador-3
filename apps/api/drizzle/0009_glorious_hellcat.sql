@@ -1,0 +1,1 @@
+ALTER TABLE "account" ALTER COLUMN "image_binary" DROP NOT NULL;

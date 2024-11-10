@@ -4,14 +4,14 @@ import { AlertTriangle, Loader2, UserPlus } from 'lucide-react'
 
 import { Button } from '@/components/catalyst/button'
 import { Input } from '@/components/catalyst/input'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '@/components/catalyst/select'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { useFormState } from '@/hooks/use-form-state'
 
 import { createInviteAction } from './actions'

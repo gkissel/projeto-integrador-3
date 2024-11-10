@@ -29,6 +29,7 @@ export async function getInvitesByUser(app: FastifyInstance) {
                   email: z.string().email(),
                   orgId: z.string().uuid(),
                   authorId: z.string().uuid(),
+                  createdAt: z.string(),
                 }),
               ),
             }),
@@ -58,6 +59,8 @@ export async function getInvitesByUser(app: FastifyInstance) {
             id: invite.id.toString(),
             orgId: invite.orgId.toString(),
             authorId: invite.authorId.toString(),
+            createdAt:
+              invite.createdAt?.toISOString() ?? new Date().toISOString(),
           })),
         }
       },

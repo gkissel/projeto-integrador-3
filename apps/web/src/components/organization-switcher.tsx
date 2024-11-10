@@ -56,6 +56,7 @@ export async function OrganizationSwitcher() {
               <DropdownItem
                 key={organization.id}
                 href={`/org/${organization.slug}`}
+                isReload
               >
                 <Avatar
                   className='mr-2 size-4'

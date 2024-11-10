@@ -9,7 +9,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '@/components/catalyst/select'
 
 import { updateMemberAction } from './actions'
 
@@ -33,7 +33,6 @@ export function UpdateMemberRoleSelect({
       <SelectContent>
         <SelectItem value='ADMIN'>Admin</SelectItem>
         <SelectItem value='MEMBER'>Member</SelectItem>
-        <SelectItem value='BILLING'>Billing</SelectItem>
       </SelectContent>
     </Select>
   )
