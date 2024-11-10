@@ -87,7 +87,16 @@ export function DropdownItem({
     return (
       <Headless.MenuItem>
         {'href' in props ? (
-          <Link {...props} className={classes} prefetch />
+          <Link
+            {...props}
+            className={classes}
+            prefetch
+            onClick={() => {
+              setTimeout(() => {
+                router.refresh()
+              }, 1)
+            }}
+          />
         ) : (
           <button type='button' {...props} className={classes} />
         )}

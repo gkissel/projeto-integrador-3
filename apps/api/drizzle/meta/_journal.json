@@ -43,6 +43,34 @@
       "when": 1730766611185,
       "tag": "0005_bizarre_eddie_brock",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1731192139773,
+      "tag": "0006_regular_vision",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1731197617600,
+      "tag": "0007_outstanding_cobalt_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1731197710672,
+      "tag": "0008_bouncy_alice",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1731198838977,
+      "tag": "0009_glorious_hellcat",
+      "breakpoints": true
     }
   ]
 }

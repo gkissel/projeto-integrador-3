@@ -40,7 +40,7 @@ export class AcceptInviteService {
       return left(new ResourceNotFoundError())
     }
 
-    if (!invite.id.equals(user.id)) {
+    if (invite.email !== user.email) {
       return left(new WrongCredentialsError())
     }
 
@@ -51,6 +51,8 @@ export class AcceptInviteService {
     })
 
     await this.membersRepository.create(member)
+
+    await this.invitesRepository.deleteByid(id)
 
     return right({})
   }

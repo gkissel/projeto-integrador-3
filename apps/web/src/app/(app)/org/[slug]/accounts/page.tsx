@@ -1,21 +1,18 @@
-'use client'
-import { useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
 
+import { getCurrentOrg } from '@/auth/auth'
 import { Divider } from '@/components/catalyst/divider'
 import { Strong, Text } from '@/components/catalyst/text'
+import { priceFormatter } from '@/lib/formatter'
 
-import { NewAccount } from '../../new-account'
+import { getAccountsAction } from './action'
+import { CreateNewAccountForm } from './create-new-account-form'
 
-export default function Accounts() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+export default async function Accounts() {
+  const currentOrg = await getCurrentOrg()
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-  }
+  const accounts = await getAccountsAction(currentOrg!)
 
   return (
     <div className='space-y-8'>
@@ -24,30 +21,37 @@ export default function Accounts() {
       </div>
 
       <Divider />
-
-      <div className='flex flex-col items-start space-y-1'>
-        <div className='mb-4'>
-          <Strong>Suas Contas</Strong>
-          <Text className='mb-4'>
-            Gerencie facilmente suas atividades bancárias
-          </Text>
-        </div>
-        <div
-          className='flex h-[190px] w-[300px] cursor-pointer flex-col items-center justify-center rounded-lg border border-[#303032] bg-[#18181B] transition-colors duration-200 hover:bg-[#2b2b2b]'
-          onClick={handleOpenModal}
-        >
-          <div className='text-4xl text-gray-400'>+</div>
-          <span className='mt-2 text-gray-500'>Adicionar Conta</span>
-        </div>
+      <div className='mb-4'>
+        <Strong>Suas Contas</Strong>
+        <Text className='mb-4'>
+          Gerencie facilmente suas atividades bancárias
+        </Text>
       </div>
 
-      <NewAccount
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        title='Nova Conta'
-      >
-        Preencha as informações para adicionar uma nova conta.
-      </NewAccount>
+      <div className='grid grid-cols-4 items-center gap-10'>
+        <CreateNewAccountForm />
+
+        {accounts?.map((account) => {
+          return (
+            <Link
+              href={`accounts/${account.id}`}
+              key={account.id}
+              className='flex flex-col gap-2.5'
+            >
+              <span>{account.name}</span>
+              <div className='relative flex h-[190px] w-[300px] cursor-pointer flex-col items-center justify-center rounded-3xl border border-[#303032] bg-[#18181B] transition-colors duration-200 hover:bg-[#2b2b2b]'>
+                <Image
+                  src={account.imageUrl ?? ''}
+                  alt={account.name}
+                  fill
+                  className='rounded-3xl object-cover hover:brightness-75'
+                />
+              </div>
+              <span> Saldo: {priceFormatter.format(account.value)} </span>
+            </Link>
+          )
+        })}
+      </div>
     </div>
   )
 }
