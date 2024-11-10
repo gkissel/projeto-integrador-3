@@ -1,4 +1,4 @@
-import { ArrowLeftRight, Crown, UserMinus } from 'lucide-react'
+import { Crown, UserMinus } from 'lucide-react'
 
 import { getInitials } from '@/app/(app)/layout/application-layout'
 import { auth, currentRole, getCurrentOrg } from '@/auth/auth'
@@ -72,12 +72,12 @@ export async function MemberList() {
                   </TableCell>
                   <TableCell className='py-2.5'>
                     <div className='flex items-center justify-end gap-2'>
-                      {role === 'OWNER' && (
+                      {/* {role === 'OWNER' && (
                         <Button color='violet'>
                           <ArrowLeftRight className='mr-2 size-4' />
                           Transferir cargo
                         </Button>
-                      )}
+                      )} */}
 
                       <UpdateMemberRoleSelect
                         memberId={member.id}
@@ -93,8 +93,8 @@ export async function MemberList() {
                         <form action={removeMemberAction.bind(null, member.id)}>
                           <Button
                             disabled={
-                              member.userId === membership.userId
-                              // member.userId === organization.ownerId
+                              member.userId === membership.userId ||
+                              member.role === 'OWNER'
                             }
                             type='submit'
                             color='red'

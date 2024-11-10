@@ -7,6 +7,7 @@ import { ResourceNotFoundError } from '@/core/errors/resource-not-found-error'
 import { EntityAlreadyExistsError } from '@/domain/money-app/application/services/errors/entity-already-exists-error'
 import { OrganizationAlreadyExistsError } from '@/domain/money-app/application/services/errors/organization-already-exists-error'
 import { UserAlreadyExistsError } from '@/domain/money-app/application/services/errors/user-already-exists-error'
+import { WrongCredentialsError } from '@/domain/money-app/application/services/errors/wrong-credentials-error'
 
 type FastifyErrorHandler = FastifyInstance['errorHandler']
 
@@ -35,31 +36,37 @@ export const errorHandler: FastifyErrorHandler = (error, request, reply) => {
 
   if (error instanceof ResourceNotFoundError) {
     reply.status(404).send({
-      message: error.message,
+      message: 'Recurso não encontrado',
     })
   }
 
   if (error instanceof NotAllowedError) {
     reply.status(403).send({
-      message: error.message,
+      message: 'Você não tem permissão para acessar este recurso',
     })
   }
 
   if (error instanceof UserAlreadyExistsError) {
     reply.status(409).send({
-      message: error.message,
+      message: 'Este e-mail já está em uso',
     })
   }
 
   if (error instanceof OrganizationAlreadyExistsError) {
     reply.status(409).send({
-      message: error.message,
+      message: 'Já existe uma organização com esse nome',
     })
   }
 
   if (error instanceof EntityAlreadyExistsError) {
     reply.status(409).send({
-      message: error.message,
+      message: 'Já existe uma entidade com esses dados',
+    })
+  }
+
+  if (error instanceof WrongCredentialsError) {
+    reply.status(401).send({
+      message: 'Credenciais inválidas',
     })
   }
 

@@ -18,7 +18,6 @@ export async function denyInvite(app: FastifyInstance) {
           summary: 'Deny invite for organization',
           security: [{ bearerAuth: [] }],
           params: z.object({
-            slug: z.string(),
             inviteId: z.string().uuid(),
           }),
           response: {

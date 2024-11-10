@@ -11,6 +11,10 @@ import {
 } from 'fastify-type-provider-zod'
 
 import { env } from './infra/env'
+import { createMoneyAccount } from './infra/http/controllers/account/create-account.controller'
+import { getAccountsByOrganization } from './infra/http/controllers/account/get-accounts-by-organization.controller'
+import { getAccountsById } from './infra/http/controllers/account/get-acocunt-by-id.controller'
+import { updateAccountImage } from './infra/http/controllers/account/update-account-image.controller'
 import { acceptInvite } from './infra/http/controllers/invite/accept-invite.controller'
 import { createInvite } from './infra/http/controllers/invite/create-invite.controller'
 import { denyInvite } from './infra/http/controllers/invite/deny-invite.controller'
@@ -20,6 +24,7 @@ import { revokeInvite } from './infra/http/controllers/invite/revoke-invite.cont
 import { createOrganization } from './infra/http/controllers/organization/create-organization.controller'
 import { getMembers } from './infra/http/controllers/organization/get-members.controller'
 import { getMembership } from './infra/http/controllers/organization/get-membership.controller'
+import { getOrganizationById } from './infra/http/controllers/organization/get-organization-by-id.controller'
 import { getOrganizationByUser } from './infra/http/controllers/organization/get-organization-by-user.controller'
 import { authenticateWithPassword } from './infra/http/controllers/user/authenticate-user.controller'
 import { createAccount } from './infra/http/controllers/user/create-user.controller'
@@ -33,7 +38,6 @@ export const app = fastify().withTypeProvider<ZodTypeProvider>()
 
 app.setSerializerCompiler(serializerCompiler)
 app.setValidatorCompiler(validatorCompiler)
-
 app.setErrorHandler(errorHandler)
 
 app.register(fastifySwagger, {
@@ -79,6 +83,8 @@ app.register(deleteProfile)
 // Organization
 app.register(createOrganization)
 app.register(getOrganizationByUser)
+app.register(getOrganizationById)
+
 // Member
 app.register(getMembers)
 app.register(getMembership)
@@ -90,3 +96,10 @@ app.register(createInvite)
 app.register(revokeInvite)
 app.register(denyInvite)
 app.register(acceptInvite)
+
+// Account
+
+app.register(createMoneyAccount)
+app.register(updateAccountImage)
+app.register(getAccountsByOrganization)
+app.register(getAccountsById)

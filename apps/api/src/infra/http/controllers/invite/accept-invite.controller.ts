@@ -18,7 +18,6 @@ export async function acceptInvite(app: FastifyInstance) {
           summary: 'Accept invite for organization',
           security: [{ bearerAuth: [] }],
           params: z.object({
-            slug: z.string(),
             inviteId: z.string().uuid(),
           }),
           response: {

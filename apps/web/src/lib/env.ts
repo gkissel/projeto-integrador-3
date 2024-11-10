@@ -9,10 +9,12 @@ export const env = createEnv({
   client: {},
   shared: {
     NEXT_PUBLIC_API_URL: z.string().url().default('http://localhost:3333/'),
+    NEXT_PUBLIC_BASE_URL: z.string().url().default('http://localhost:3000/'),
   },
   runtimeEnv: {
     SERVER_PORT: process.env.SERVER_PORT,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
   },
   emptyStringAsUndefined: true,
 })
