@@ -1,95 +1,24 @@
 'use client'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
+import { redirect } from 'next/navigation'
 
 import { Button } from '@/components/catalyst/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Field, Label } from '@/components/catalyst/fieldset'
+import { Input } from '@/components/catalyst/input'
+import { useFormState } from '@/hooks/use-form-state'
 
-export default function ForgotPasswordPage() {
-  const [currentPassword, setCurrentPassword] = useState<string>('')
-  const [newPassword, setNewPassword] = useState<string>('')
-  const [confirmPassword, setConfirmPassword] = useState<string>('')
-  const [errorMessages, setErrorMessages] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: '',
-  })
-  const [successMessage, setSuccessMessage] = useState<string>('')
+import { changePasswordAction } from '../actions'
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setSuccessMessage('')
-    setErrorMessages({
-      currentPassword: '',
-      newPassword: '',
-      confirmPassword: '',
-    })
-
-    let isValid = true
-    if (!currentPassword) {
-      setErrorMessages((prev) => ({
-        ...prev,
-        currentPassword: 'Senha atual é obrigatória.',
-      }))
-      isValid = false
-    }
-    if (!newPassword) {
-      setErrorMessages((prev) => ({
-        ...prev,
-        newPassword: 'Nova senha é obrigatória.',
-      }))
-      isValid = false
-    } else if (newPassword.length < 6) {
-      setErrorMessages((prev) => ({
-        ...prev,
-        newPassword: 'A nova senha deve ter no mínimo 6 dígitos.',
-      }))
-      isValid = false
-    }
-    if (!confirmPassword) {
-      setErrorMessages((prev) => ({
-        ...prev,
-        confirmPassword: 'Confirmação da nova senha é obrigatória.',
-      }))
-      isValid = false
-    }
-    if (newPassword && confirmPassword && newPassword !== confirmPassword) {
-      setErrorMessages((prev) => ({
-        ...prev,
-        confirmPassword: 'As novas senhas não coincidem.',
-      }))
-      isValid = false
-    }
-
-    if (!isValid) return
-
-    try {
-      const response = await fetch('/api/change-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ currentPassword, newPassword }),
-      })
-
-      const data = await response.json()
-      if (response.ok) {
-        setSuccessMessage(data.message)
-      } else {
-        setErrorMessages((prev) => ({ ...prev, currentPassword: data.message }))
-      }
-    } catch (error) {
-      setErrorMessages((prev) => ({
-        ...prev,
-        currentPassword: 'Ocorreu um erro ao alterar a senha. Tente novamente.',
-      }))
-      console.error('Erro:', error)
-    }
-  }
+export default function ChangePasswordPage() {
+  const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
+    changePasswordAction,
+    () => {
+      redirect('/account')
+    },
+  )
 
   return (
     <div>
-      <div className='relative m-auto h-full'>
+      <div className='relative m-auto h-full max-w-xl'>
         <div className='mt-10 rounded-lg border-2'>
           <div className='p-8 pb-8'>
             <strong className='text-2xl font-bold'>Alterar Senha</strong>
@@ -99,59 +28,55 @@ export default function ForgotPasswordPage() {
               confirmar sua identidade e defina uma nova senha.
             </p>
           </div>
+
           <form onSubmit={handleSubmit} className='space-y-4'>
-            <div className='m-auto mb-12 mt-8 space-y-1 px-8'>
-              <Label htmlFor='email'>Senha Atual</Label>
+            <Field className='m-auto mb-12 mt-8 space-y-1 px-8'>
+              <Label htmlFor='oldPassword'>Senha Atual</Label>
               <Input
-                name='current_password'
+                name='oldPassword'
                 type='password'
-                id='current_password'
+                id='oldPassword'
                 className='disabled:cursor-not-allowed'
-                onChange={(e) => setCurrentPassword(e.target.value)}
               />
-              {errorMessages.currentPassword && (
+              {errors?.oldPassword && (
+                <p className='text-xs text-red-500'>{errors.oldPassword[0]}</p>
+              )}
+            </Field>
+
+            <Field className='m-auto mb-12 mt-8 space-y-1 px-8'>
+              <Label htmlFor='newPassword'>Nova Senha</Label>
+              <Input
+                name='newPassword'
+                type='password'
+                id='newPassword'
+                className='disabled:cursor-not-allowed'
+              />
+              {errors?.newPassword && (
+                <p className='text-xs text-red-500'>{errors.newPassword[0]}</p>
+              )}
+            </Field>
+            <Field className='m-auto mb-12 mt-8 space-y-1 px-8'>
+              <Label htmlFor='confirmPassword'>Confirmar Nova Senha</Label>
+              <Input
+                name='confirmPassword'
+                type='password'
+                id='confirmPassword'
+                className='disabled:cursor-not-allowed'
+              />
+              {errors?.confirmPassword && (
                 <p className='text-xs text-red-500'>
-                  {errorMessages.currentPassword}
+                  {errors.confirmPassword[0]}
                 </p>
               )}
-            </div>
-            <div className='m-auto mb-12 mt-8 space-y-1 px-8'>
-              <Label htmlFor='email'>Nova Senha</Label>
-              <Input
-                name='new_password'
-                type='password'
-                id='new_password'
-                className='disabled:cursor-not-allowed'
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-              {errorMessages.newPassword && (
-                <p className='text-xs text-red-500'>
-                  {errorMessages.newPassword}
-                </p>
-              )}
-            </div>
-            <div className='m-auto mb-12 mt-8 space-y-1 px-8'>
-              <Label htmlFor='email'>Repita a nova senha</Label>
-              <Input
-                name='con_new_password'
-                type='password'
-                id='con_new_password'
-                className='disabled:cursor-not-allowed'
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              {errorMessages.confirmPassword && (
-                <p className='text-xs text-red-500'>
-                  {errorMessages.confirmPassword}
-                </p>
-              )}
-            </div>
+            </Field>
+            {message && <p className='px-8 text-sm text-red-500'>{message}</p>}
 
             <div className='flex justify-center space-x-4 pb-8 pt-16'>
-              <Button color='indigo' type='submit'>
+              <Button color='indigo' type='submit' disabled={isPending}>
                 Alterar Senha
               </Button>
-              <Button type='button'>
-                <Link href='/account'>Cancelar</Link>
+              <Button type='button' href='/account'>
+                Cancelar
               </Button>
             </div>
           </form>

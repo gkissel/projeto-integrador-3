@@ -19,8 +19,10 @@ import { createAccountAction } from './action'
 export function CreateNewAccountForm() {
   const [isOpen, setIsOpen] = useState(false)
 
-  const [{ errors, message, success }, handleSubmit, isPending] =
-    useFormState(createAccountAction)
+  const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
+    createAccountAction,
+    () => setIsOpen(false),
+  )
 
   return (
     <>

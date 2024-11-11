@@ -1,7 +1,7 @@
-import { EllipsisVerticalIcon } from 'lucide-react'
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 
+import { getCurrentOrg } from '@/auth/auth'
 import Button from '@/components/catalyst/button'
 import { Divider } from '@/components/catalyst/divider'
 import {
@@ -13,13 +13,17 @@ import {
   TableRow,
 } from '@/components/catalyst/table'
 import { Text } from '@/components/catalyst/text'
+import { getTransactionsByAccount } from '@/http/transaction/get-transactions-by-account'
 import { priceFormatter } from '@/lib/formatter'
 
+import { CreateTransactionForm } from '../../transfers/components/create-transaction-form'
+import { TransactionInfoDropDown } from '../../transfers/components/transaction-info-button'
+import { getAccountsAction } from '../action'
 import { getAccountAction } from './actions'
 
 const TransactionType = {
-  income: 'Entrada',
-  outcome: 'Saída',
+  INCOME: 'Entrada',
+  OUTCOME: 'Saída',
 } as const
 
 type AccountPageProps = {
@@ -27,9 +31,19 @@ type AccountPageProps = {
 }
 
 export default async function AccountPage({ params }: AccountPageProps) {
+  const currentOrg = await getCurrentOrg()
+
+  if (!currentOrg) {
+    redirect('/')
+  }
+
   const { id } = await params
 
-  const account = await getAccountAction(id)
+  const [account, accounts, { transactions }] = await Promise.all([
+    getAccountAction(id),
+    getAccountsAction(currentOrg),
+    getTransactionsByAccount(currentOrg, id),
+  ])
 
   if (!account) {
     notFound()
@@ -74,7 +88,10 @@ export default async function AccountPage({ params }: AccountPageProps) {
         <div className='flex flex-col justify-between'>
           <Button>Editar Informações</Button>
 
-          <Button color='light'>Nova Transferência</Button>
+          <CreateTransactionForm
+            accounts={accounts}
+            defaultAccount={account.id}
+          />
         </div>
       </div>
 
@@ -98,39 +115,44 @@ export default async function AccountPage({ params }: AccountPageProps) {
           </TableHead>
 
           <TableBody>
-            <TableRow>
-              <TableCell>01/01/2022</TableCell>
-              <TableCell>Sálario</TableCell>
-              <TableCell>{TransactionType.income}</TableCell>
-              <TableCell>
-                {' '}
-                {account.value < 0 ? (
-                  <span className='text-rose-400'>
-                    {priceFormatter.format(account.value)}
-                  </span>
-                ) : (
-                  <span className='text-lime-300'>
-                    {priceFormatter.format(account.value)}
-                  </span>
-                )}
-              </TableCell>
-              <TableCell>
-                <div className='flex items-center gap-2'>
-                  <div
-                    className='h-4 w-4 rounded-full'
-                    style={{
-                      backgroundColor: account.mainColor,
-                    }}
-                  />{' '}
-                  {account.name}
-                </div>
-              </TableCell>
-              <TableCell className='text-right'>
-                <Button className='w-fit px-2 text-2xl lg:px-2'>
-                  <EllipsisVerticalIcon />
-                </Button>
-              </TableCell>
-            </TableRow>
+            {transactions.map(async (transaction) => {
+              const account = await getAccountAction(transaction.accountId)
+
+              return (
+                <TableRow key={transaction.id}>
+                  <TableCell>
+                    {new Date(transaction.createdAt).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell>{transaction.description}</TableCell>
+                  <TableCell>{TransactionType[transaction.type]}</TableCell>
+                  <TableCell>
+                    {transaction.type === 'OUTCOME' ? (
+                      <span className='text-rose-400'>
+                        {priceFormatter.format(transaction.value)}
+                      </span>
+                    ) : (
+                      <span className='text-lime-300'>
+                        {priceFormatter.format(transaction.value)}
+                      </span>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center gap-2'>
+                      <div
+                        className='h-4 w-4 rounded-full'
+                        style={{
+                          backgroundColor: account?.mainColor,
+                        }}
+                      />{' '}
+                      {account?.name}
+                    </div>
+                  </TableCell>
+                  <TableCell className='text-right'>
+                    <TransactionInfoDropDown transaction={transaction} />
+                  </TableCell>
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       </div>
