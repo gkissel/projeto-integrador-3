@@ -3,6 +3,7 @@ import { HTTPError } from 'ky'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
+import { changePassword } from '@/http/user/change-password'
 import { deleteProfile } from '@/http/user/delete-user'
 import { updateProfile } from '@/http/user/update-user'
 
@@ -77,4 +78,47 @@ export async function deleteAccountAction() {
   }
 
   redirect('/auth/sign-in')
+}
+
+const changePasswordSchema = z
+  .object({
+    oldPassword: z.string().min(1, { message: 'Senha atual inválida.' }),
+    newPassword: z
+      .string()
+      .min(8, { message: 'Nova senha deve ter no mínimo 8 caracteres.' }),
+    confirmPassword: z
+      .string()
+      .min(1, { message: 'Confirmação de senha é obrigatória.' }),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: 'As senhas não conferem.',
+    path: ['confirmPassword'],
+  })
+
+export async function changePasswordAction(data: FormData) {
+  const result = changePasswordSchema.safeParse(Object.fromEntries(data))
+
+  if (!result.success) {
+    const errors = result.error.flatten().fieldErrors
+    return { success: false, message: null, errors }
+  }
+
+  const { oldPassword, newPassword } = result.data
+
+  try {
+    await changePassword({ oldPassword, newPassword })
+    return { success: true, message: null, errors: null }
+  } catch (err) {
+    if (err instanceof HTTPError) {
+      const { message } = await err.response.json()
+      return { success: false, message, errors: null }
+    }
+
+    console.error(err)
+    return {
+      success: false,
+      message: 'Unexpected error, try again in a few minutes.',
+      errors: null,
+    }
+  }
 }
