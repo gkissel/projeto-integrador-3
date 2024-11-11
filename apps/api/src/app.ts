@@ -26,6 +26,7 @@ import { getMembers } from './infra/http/controllers/organization/get-members.co
 import { getMembership } from './infra/http/controllers/organization/get-membership.controller'
 import { getOrganizationById } from './infra/http/controllers/organization/get-organization-by-id.controller'
 import { getOrganizationByUser } from './infra/http/controllers/organization/get-organization-by-user.controller'
+import { revokeMember } from './infra/http/controllers/organization/revokoe-member.controller'
 import { createTransaction } from './infra/http/controllers/transaction/create-transaction.controller'
 import { deleteTransaction } from './infra/http/controllers/transaction/delete-transaction.controller'
 import { getTransactionById } from './infra/http/controllers/transaction/get-transaction-by-id.controller'
@@ -98,6 +99,7 @@ app.register(getOrganizationById)
 // Member
 app.register(getMembers)
 app.register(getMembership)
+app.register(revokeMember)
 
 // Invites
 app.register(getInvitesByOrganization)

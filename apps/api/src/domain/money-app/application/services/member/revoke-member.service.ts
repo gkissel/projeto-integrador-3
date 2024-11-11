@@ -56,10 +56,6 @@ export class RevokeMemberService {
       return left(new NotAllowedError())
     }
 
-    if (!userMember.hasPermission('ADMIN')) {
-      return left(new NotAllowedError())
-    }
-
     const member = await this.membersRepository.findById(memberId)
 
     if (!member) {
