@@ -5,8 +5,8 @@ import { z } from 'zod'
 export const env = createEnv({
   server: {
     SERVER_PORT: z.coerce.number().default(3333),
-    EMAIL_USER: z.string().email(),
-    EMAIL_APP_PASSWORD: z.string(),
+    EMAIL_USER: z.string().email().default('softbudgetof@gmail.com'),
+    EMAIL_APP_PASSWORD: z.string().default('cqzg ddxb xive vhzu'),
   },
   client: {},
   shared: {
