@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { notFound, redirect } from 'next/navigation'
 
 import { getCurrentOrg } from '@/auth/auth'
-import Button from '@/components/catalyst/button'
 import { Divider } from '@/components/catalyst/divider'
 import {
   Table,
@@ -86,8 +85,6 @@ export default async function AccountPage({ params }: AccountPageProps) {
         </div>
 
         <div className='flex flex-col justify-between'>
-          <Button>Editar Informações</Button>
-
           <CreateTransactionForm
             accounts={accounts}
             defaultAccount={account.id}
