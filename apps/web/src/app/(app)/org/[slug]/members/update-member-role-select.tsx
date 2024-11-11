@@ -31,8 +31,8 @@ export function UpdateMemberRoleSelect({
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value='ADMIN'>Admin</SelectItem>
-        <SelectItem value='MEMBER'>Member</SelectItem>
+        <SelectItem value='ADMIN'>Administrador</SelectItem>
+        <SelectItem value='MEMBER'>Membro</SelectItem>
       </SelectContent>
     </Select>
   )

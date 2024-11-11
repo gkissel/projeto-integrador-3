@@ -53,6 +53,26 @@ export class Transaction extends Entity<TransactionProps> {
     return this.props.updatedAt
   }
 
+  public update({
+    description,
+    type,
+    value,
+  }: Partial<Pick<TransactionProps, 'description' | 'value' | 'type'>>) {
+    if (description) {
+      this.props.description = description
+    }
+
+    if (type) {
+      this.props.type = type
+    }
+
+    if (value) {
+      this.props.value = value
+    }
+
+    this.touch()
+  }
+
   private touch() {
     this.props.updatedAt = new Date()
   }

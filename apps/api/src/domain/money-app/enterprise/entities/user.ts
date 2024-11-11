@@ -52,7 +52,7 @@ export class User extends Entity<UserProps> {
     this.props.updatedAt = new Date()
   }
 
-  protected changePassword(password: string) {
+  public changePassword(password: string) {
     this.props.password = password
     this.touch()
   }

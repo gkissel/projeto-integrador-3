@@ -1,47 +1,19 @@
 'use client'
 import Image from 'next/image'
-import Link from 'next/link'
-import { useState } from 'react'
 
 import { Button } from '@/components/catalyst/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Field, Label } from '@/components/catalyst/fieldset'
+import { Input } from '@/components/catalyst/input'
+import { useFormState } from '@/hooks/use-form-state'
 
 import Logo from '../../../../public/logo.png'
+import { recoverPasswordAction } from './actions'
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState<string>('')
-  const [error, setError] = useState<string>('')
-  const [successMessage, setSuccessMessage] = useState<string>('')
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setSuccessMessage('')
-    setError('')
-
-    if (!email) {
-      setError('Por favor, insira seu e-mail')
-      return
-    }
-
-    try {
-      const response = await fetch('/api/forgot-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      })
-
-      const data = await response.json()
-      if (response.ok) {
-        setSuccessMessage(data.message)
-      } else {
-        setError(data.message)
-      }
-    } catch (error) {
-      setError('Ocorreu um erro ao enviar o e-mail. Tente novamente.')
-      console.error('Erro:', error)
-    }
-  }
+  const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
+    recoverPasswordAction,
+    () => {},
+  )
 
   return (
     <div>
@@ -51,7 +23,7 @@ export default function ForgotPasswordPage() {
         </div>
         <strong className='-ml-8 text-4xl font-bold'>SafeBudget</strong>
       </div>
-      <div className='relative m-auto h-full w-1/3'>
+      <div className='relative m-auto h-full max-w-xl'>
         <div className='mt-10 rounded-lg border-2'>
           <div className='p-8 pb-8'>
             <strong className='text-2xl font-bold'>Recuperar a senha</strong>
@@ -60,28 +32,35 @@ export default function ForgotPasswordPage() {
               e lhe enviaremos um link com as instruções
             </p>
           </div>
+
           <form onSubmit={handleSubmit} className='space-y-4'>
-            <div className='m-auto mb-12 mt-8 space-y-1 px-8'>
+            <Field className='m-auto mb-12 mt-8 space-y-1 px-8'>
               <Label htmlFor='email'>E-mail</Label>
               <Input
                 name='email'
                 type='email'
                 id='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                className='disabled:cursor-not-allowed'
               />
-              {error && <p className='text-red-500'>{error}</p>}
-              {successMessage && (
-                <p className='text-green-500'>{successMessage}</p>
+              {errors?.email && (
+                <p className='text-xs text-red-500'>{errors.email[0]}</p>
               )}
-            </div>
+            </Field>
 
-            <div className='flex flex-col items-center space-y-4 pb-8'>
-              <Button className='w-1/3' color='indigo' type='submit'>
+            {message && (
+              <p
+                className={`px-8 text-sm ${success ? 'text-green-500' : 'text-red-500'}`}
+              >
+                {message}
+              </p>
+            )}
+
+            <div className='flex justify-center space-x-4 pb-8 pt-16'>
+              <Button color='indigo' type='submit' disabled={isPending}>
                 Recuperar senha
               </Button>
-              <Button className='w-1/3' type='button'>
-                <Link href='/auth/sign-in'>Voltar para o Login</Link>
+              <Button type='button' href='/auth/sign-in'>
+                Voltar para o Login
               </Button>
             </div>
           </form>
