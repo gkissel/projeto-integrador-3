@@ -38,11 +38,14 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
     .filter((t) => t.type === 'OUTCOME')
     .reduce((acc, t) => acc + t.value, 0)
 
-  const biggestValue = Math.max(
-    ...thisWeekTransactions.map((t) =>
-      t.type === 'OUTCOME' ? -t.value : t.value,
-    ),
-  )
+  const biggestValue =
+    thisWeekTransactions.length > 0
+      ? Math.max(
+          ...thisWeekTransactions.map((t) =>
+            t.type === 'OUTCOME' ? -t.value : t.value,
+          ),
+        )
+      : 0
 
   const lastWeekTransactions = transactions.filter(
     (t) =>
@@ -58,25 +61,25 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
     .reduce((acc, t) => acc + t.value, 0)
 
   const incomePercentage = lastWeekIncome
-    ? ((totalIncome - lastWeekIncome) / lastWeekIncome) * 100
-    : ((totalIncome - 0) / 1) * 100
+    ? ((totalIncome - lastWeekIncome) / lastWeekIncome) * 1
+    : ((totalIncome - 0) / 1) * 1
 
   const outcomePercentage = lastWeekOutcome
-    ? ((totalOutcome - lastWeekOutcome) / lastWeekOutcome) * 100
-    : ((totalOutcome - 0) / 1) * 100
+    ? ((totalOutcome - lastWeekOutcome) / lastWeekOutcome) * 1
+    : ((totalOutcome - 0) / 1) * 1
 
   const totalPercentage =
     lastWeekIncome - lastWeekOutcome
       ? ((totalIncome - totalOutcome - (lastWeekIncome - lastWeekOutcome)) /
           (lastWeekIncome - lastWeekOutcome)) *
-        100
-      : ((totalIncome - totalOutcome - 0) / 1) * 100
+        1
+      : ((totalIncome - totalOutcome - 0) / 1) * 1
 
   const biggestTransactionPercentage = biggestValue
     ? ((biggestValue - Math.max(...transactions.map((t) => t.value))) /
         Math.max(...transactions.map((t) => t.value))) *
-      100
-    : ((biggestValue - 0) / 1) * 100
+      1
+    : ((biggestValue - 0) / 1) * 1
 
   const format = priceFormatter.format
 
@@ -123,7 +126,7 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
                   totalPercentage > 0 ? 'text-lime-500' : 'text-rose-500'
                 } line-clamp-1`}
               >
-                {totalPercentage} %
+                {Math.trunc(totalPercentage)} %
               </span>
             </div>
 
@@ -162,7 +165,7 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
                   incomePercentage > 0 ? 'text-lime-500' : 'text-rose-500'
                 } line-clamp-1`}
               >
-                {incomePercentage} %
+                {Math.trunc(incomePercentage)} %
               </span>
             </div>
 
@@ -201,7 +204,7 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
                   outcomePercentage < 0 ? 'text-lime-500' : 'text-rose-500'
                 } line-clamp-1`}
               >
-                {outcomePercentage} %
+                {Math.trunc(outcomePercentage)} %
               </span>
             </div>
 
@@ -246,7 +249,7 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
                     : 'text-rose-500'
                 } line-clamp-1`}
               >
-                {biggestTransactionPercentage} %
+                {Math.trunc(biggestTransactionPercentage)} %
               </span>
             </div>
 

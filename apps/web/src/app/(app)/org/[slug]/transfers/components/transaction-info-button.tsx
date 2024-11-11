@@ -54,6 +54,9 @@ export function TransactionInfoDropDown({
 
   const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
     updateTransactionAction,
+    () => {
+      setIsOpen(false)
+    },
   )
 
   return (
