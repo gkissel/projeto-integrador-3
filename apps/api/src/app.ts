@@ -26,11 +26,19 @@ import { getMembers } from './infra/http/controllers/organization/get-members.co
 import { getMembership } from './infra/http/controllers/organization/get-membership.controller'
 import { getOrganizationById } from './infra/http/controllers/organization/get-organization-by-id.controller'
 import { getOrganizationByUser } from './infra/http/controllers/organization/get-organization-by-user.controller'
+import { createTransaction } from './infra/http/controllers/transaction/create-transaction.controller'
+import { deleteTransaction } from './infra/http/controllers/transaction/delete-transaction.controller'
+import { getTransactionById } from './infra/http/controllers/transaction/get-transaction-by-id.controller'
+import { getTransactionsByAccount } from './infra/http/controllers/transaction/get-transactions-by-account.controller'
+import { getTransactionsByOrganization } from './infra/http/controllers/transaction/get-transactions-by-organization.controller'
+import { updateTransactionInfo } from './infra/http/controllers/transaction/update-transaction-info.controller'
 import { authenticateWithPassword } from './infra/http/controllers/user/authenticate-user.controller'
+import { changePassword } from './infra/http/controllers/user/change-password.controller'
 import { createAccount } from './infra/http/controllers/user/create-user.controller'
 import { deleteProfile } from './infra/http/controllers/user/delete-user.controller'
 import { getUserByID } from './infra/http/controllers/user/get-user-by-id.controller'
 import { getProfile } from './infra/http/controllers/user/get-user-profile.controller'
+import { recoverPassword } from './infra/http/controllers/user/recover-passowrd.controller'
 import { updateProfile } from './infra/http/controllers/user/update-user.controller'
 import { errorHandler } from './infra/http/error-handler'
 
@@ -73,6 +81,8 @@ app.register(fastifyCors)
 // User
 app.register(createAccount)
 app.register(authenticateWithPassword)
+app.register(recoverPassword)
+app.register(changePassword)
 
 // Profile
 app.register(getProfile)
@@ -103,3 +113,11 @@ app.register(createMoneyAccount)
 app.register(updateAccountImage)
 app.register(getAccountsByOrganization)
 app.register(getAccountsById)
+
+// Transaction
+app.register(createTransaction)
+app.register(getTransactionsByAccount)
+app.register(getTransactionsByOrganization)
+app.register(getTransactionById)
+app.register(updateTransactionInfo)
+app.register(deleteTransaction)

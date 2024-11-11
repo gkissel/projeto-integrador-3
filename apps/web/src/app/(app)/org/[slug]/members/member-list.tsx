@@ -82,11 +82,7 @@ export async function MemberList() {
                       <UpdateMemberRoleSelect
                         memberId={member.id}
                         value={member.role}
-                        disabled={
-                          member.userId === membership.userId ||
-                          member.role === 'OWNER' ||
-                          role === 'MEMBER'
-                        }
+                        disabled
                       />
 
                       {role !== 'MEMBER' && (

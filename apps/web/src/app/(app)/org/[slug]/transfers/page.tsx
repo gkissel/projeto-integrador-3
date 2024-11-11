@@ -1,30 +1,45 @@
-'use client'
-import { useState } from 'react'
+import { redirect } from 'next/navigation'
 
-import { Button } from '@/components/catalyst/button'
+import { getCurrentOrg } from '@/auth/auth'
 import { Divider } from '@/components/catalyst/divider'
-import { Strong, Text } from '@/components/catalyst/text'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/catalyst/table'
+import { Text } from '@/components/catalyst/text'
+import { getTransactionsByOrganization } from '@/http/transaction/get-transactions-by-organizations'
+import { priceFormatter } from '@/lib/formatter'
 
-import { NewTransfer } from '../../new-transfer'
+import { getAccountAction } from '../accounts/[id]/actions'
+import { getAccountsAction } from '../accounts/action'
+import { CreateTransactionForm } from './components/create-transaction-form'
+import { TransactionInfoDropDown } from './components/transaction-info-button'
 
-export default function Transfers() {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+const TransactionType = {
+  INCOME: 'Entrada',
+  OUTCOME: 'Saída',
+} as const
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true)
+export default async function Transfers() {
+  const currentOrg = await getCurrentOrg()
+
+  if (!currentOrg) {
+    redirect('/')
   }
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
-  }
+  const { transactions } = await getTransactionsByOrganization(currentOrg)
+
+  const accounts = await getAccountsAction(currentOrg)
 
   return (
     <div className='space-y-8'>
       <div className='flex items-center justify-between'>
         <h1 className='text-2xl font-bold'>Transferências</h1>
-        <Button onClick={handleOpenModal} className='ml-auto'>
-          Nova Transferência
-        </Button>
+        <CreateTransactionForm accounts={accounts} />
       </div>
 
       <Divider />
@@ -38,20 +53,61 @@ export default function Transfers() {
 
       <Divider />
 
-      <div className='grid grid-cols-4 gap-4 pt-4 text-left'>
-        <div className='font-semibold'>Destino</div>
-        <div className='font-semibold'>Data</div>
-        <div className='font-semibold'>Valor</div>
-        <div className='font-semibold'>Conta</div>
-      </div>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableHeader className='w-24'>Data</TableHeader>
+            <TableHeader className='w-96'>Descrição</TableHeader>
+            <TableHeader className='w-16'>Tipo</TableHeader>
+            <TableHeader className='w-24'>Valor</TableHeader>
 
-      <NewTransfer
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        title='Nova Transferência'
-      >
-        Preencha as informações para adicionar uma nova transferência.
-      </NewTransfer>
+            <TableHeader className='w-16'>Conta</TableHeader>
+
+            <TableHeader className='w-4 text-right'>Ações</TableHeader>
+          </TableRow>
+        </TableHead>
+
+        <TableBody>
+          {transactions.map(async (transaction) => {
+            const account = await getAccountAction(transaction.accountId)
+
+            return (
+              <TableRow key={transaction.id}>
+                <TableCell>
+                  {new Date(transaction.createdAt).toLocaleDateString()}
+                </TableCell>
+                <TableCell>{transaction.description}</TableCell>
+                <TableCell>{TransactionType[transaction.type]}</TableCell>
+                <TableCell>
+                  {transaction.type === 'OUTCOME' ? (
+                    <span className='text-rose-400'>
+                      {priceFormatter.format(transaction.value)}
+                    </span>
+                  ) : (
+                    <span className='text-lime-300'>
+                      {priceFormatter.format(transaction.value)}
+                    </span>
+                  )}
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center gap-2'>
+                    <div
+                      className='h-4 w-4 rounded-full'
+                      style={{
+                        backgroundColor: account?.mainColor,
+                      }}
+                    />{' '}
+                    {account?.name}
+                  </div>
+                </TableCell>
+                <TableCell className='text-right'>
+                  <TransactionInfoDropDown transaction={transaction} />
+                </TableCell>
+              </TableRow>
+            )
+          })}
+        </TableBody>
+      </Table>
     </div>
   )
 }
