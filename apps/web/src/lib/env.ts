@@ -4,14 +4,22 @@ import { z } from 'zod'
 
 export const env = createEnv({
   server: {
-    SERVER_PORT: z.coerce.number().default(3333),
-    EMAIL_USER: z.string().email().default('softbudgetof@gmail.com'),
-    EMAIL_APP_PASSWORD: z.string().default('cqzg ddxb xive vhzu'),
+    SERVER_PORT: z.coerce.number().optional().default(3333),
+    EMAIL_USER: z.string().email().optional().default('softbudgetof@gmail.com'),
+    EMAIL_APP_PASSWORD: z.string().optional().default('cqzg ddxb xive vhzu'),
   },
   client: {},
   shared: {
-    NEXT_PUBLIC_API_URL: z.string().url().default('http://localhost:3333/'),
-    NEXT_PUBLIC_BASE_URL: z.string().url().default('http://localhost:3000/'),
+    NEXT_PUBLIC_API_URL: z
+      .string()
+      .url()
+      .optional()
+      .default('http://localhost:3333/'),
+    NEXT_PUBLIC_BASE_URL: z
+      .string()
+      .url()
+      .optional()
+      .default('http://localhost:3000/'),
   },
   runtimeEnv: {
     SERVER_PORT: process.env.SERVER_PORT,
