@@ -97,7 +97,7 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
         <div className='flex w-72 flex-col gap-5 rounded-3xl border-2 border-zinc-500 p-4'>
           <Text>Receita total</Text>
 
-          <Strong className='text-3xl'>
+          <Strong className='line-clamp-1 text-3xl'>
             {format(totalIncome - totalOutcome)}
           </Strong>
 
@@ -121,13 +121,13 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
               <span
                 className={`${
                   totalPercentage > 0 ? 'text-lime-500' : 'text-rose-500'
-                }`}
+                } line-clamp-1`}
               >
                 {totalPercentage} %
               </span>
             </div>
 
-            <Text>from last week</Text>
+            <Text>da semana passada</Text>
           </div>
         </div>
       </SwiperSlide>
@@ -135,7 +135,9 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
         <div className='flex w-72 flex-col gap-5 rounded-3xl border-2 border-zinc-500 p-4'>
           <Text>Ganhos</Text>
 
-          <Strong className='text-3xl'>{format(totalIncome)}</Strong>
+          <Strong className='line-clamp-1 text-3xl'>
+            {format(totalIncome)}
+          </Strong>
 
           <div className='flex items-center gap-2'>
             <div
@@ -158,13 +160,13 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
               <span
                 className={`${
                   incomePercentage > 0 ? 'text-lime-500' : 'text-rose-500'
-                }`}
+                } line-clamp-1`}
               >
                 {incomePercentage} %
               </span>
             </div>
 
-            <Text>from last week</Text>
+            <Text>da semana passada</Text>
           </div>
         </div>
       </SwiperSlide>{' '}
@@ -172,7 +174,9 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
         <div className='flex w-72 flex-col gap-5 rounded-3xl border-2 border-zinc-500 p-4'>
           <Text>Saídas</Text>
 
-          <Strong className='text-3xl'>{format(totalOutcome)}</Strong>
+          <Strong className='line-clamp-1 text-3xl'>
+            {format(totalOutcome)}
+          </Strong>
 
           <div className='flex items-center gap-2'>
             <div
@@ -195,13 +199,13 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
               <span
                 className={`${
                   outcomePercentage < 0 ? 'text-lime-500' : 'text-rose-500'
-                }`}
+                } line-clamp-1`}
               >
                 {outcomePercentage} %
               </span>
             </div>
 
-            <Text>from last week</Text>
+            <Text>da semana passada</Text>
           </div>
         </div>
       </SwiperSlide>
@@ -209,7 +213,9 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
         <div className='flex w-72 flex-col gap-5 rounded-3xl border-2 border-zinc-500 p-4'>
           <Text>Maior Transação</Text>
 
-          <Strong className='text-3xl'>{format(biggestValue)}</Strong>
+          <Strong className='line-clamp-1 text-3xl'>
+            {format(biggestValue)}
+          </Strong>
 
           <div className='flex items-center gap-2'>
             <div
@@ -238,13 +244,13 @@ const OverviewSlider: React.FC<OverviewSliderProps> = ({ transactions }) => {
                   biggestTransactionPercentage > 0
                     ? 'text-lime-500'
                     : 'text-rose-500'
-                }`}
+                } line-clamp-1`}
               >
                 {biggestTransactionPercentage} %
               </span>
             </div>
 
-            <Text>from last week</Text>
+            <Text>da semana passada</Text>
           </div>
         </div>
       </SwiperSlide>{' '}
